@@ -7,6 +7,7 @@ export default class Game {
         this._onrefresh = []
         this._stopped = false
 
+        this._context.fillStyle = 'white'
         // Initialize
         this._context.fillRect(0, 0, this.mapWidth, this.mapHeight)
     }
