@@ -1,4 +1,4 @@
-import * as Utils from '../shared/utils.js'
+import * as Github from '../shared/github.js'
 
 export default {
     template: `
@@ -20,7 +20,7 @@ export default {
         }
     },
     created: async function () {
-        this.avatarUrl = await Utils.getAvatarUrl()
+        this.avatarUrl = await Github.getAvatarUrl()
     }
     
 }

@@ -1,3 +1,5 @@
+import { jsonEquals, } from '../../shared/utils.js'
+
 let Direction = Object.freeze({
     UP: 2,
     RIGHT: 1,
@@ -20,80 +22,110 @@ let Direction = Object.freeze({
 })
 
 export default class Snake {
-    constructor(game, grid) {
-        this._game = game
-        this._grid = grid
-        this._body = [{ x: 0, y: 0 }]
-        this._direction = Direction.RIGHT
-        this._growSize = 15
+    constructor(initLen) {
+        this.__body = [{ x: 0, y: 0 }]
+        this.__direction = Direction.RIGHT
+        this.__growSize = initLen
+        this.__killed = false
+        this.__color = '#9AC9E7'
+        this.__keyLock = false
 
-        this._game.register('keydown', event => {
-            let direction = Direction.getDirectionByKey(event.key)
-            if (direction !== Direction.getOpposite(this._direction))
-                this._direction = direction
-        })
-
-        this._grid.onrefresh.push(context => {
-            this.move()
-            context.fillStyle = '#B388FF'
-            for (let point of this._body) {
-                context.fillCell(point.x, point.y)
+        window.addEventListener('keydown', event => {
+            if (this.__keyLock) {
+                return
             }
+            let direction = Direction.getDirectionByKey(event.key)
+            if (direction !== Direction.getOpposite(this.__direction))
+                this.__direction = direction
+            this.__keyLock = true
         })
     }
 
     get head() {
-        return this._body[0]
+        return this.__body[0]
     }
 
-    _addX(x, n) {
-        return (x + n) % this._grid.XLength
+    get length() {
+        return this.__body.length
     }
 
-    _addY(y, n) {
-        return (y + n) % this._grid.YLength
+    get body() {
+        return this.__body
     }
 
-    _reduceX(x, n) {
-        if (x - n < 0)
-            return this._grid.XLength + (x - n) % this._grid.XLength
-        return x - n
+    // Game Object
+    get occupiedCells() {
+        return this.body
     }
 
-    _reduceY(y, n) {
-        if (y - n < 0)
-            return this._grid.YLength + (y - n) % this._grid.YLength
-        return y - n
+
+    update(args) {
+        if (this.__killed) {
+            args.game.stop()
+            return
+        }
+        this.move(args.gridWidth, args.gridHeight)
+        if (this.__body.slice(1).findIndex((p) => jsonEquals(this.head, p)) > -1) {
+            this.kill()
+        }
+        this.__keyLock = false
     }
 
-    move() {
-        switch (this._direction) {
+    draw(context) {
+        context.fillStyle = this.__color
+        for (let point of this.__body) {
+            context.fillCell(point.x, point.y)
+        }
+    }
+
+    move(maxWidth, maxHeight) {
+        switch (this.__direction) {
             case Direction.UP:
-                this._body.unshift({ x: this.head.x, y: this._reduceY(this.head.y, 1) })
+                this.__body.unshift({ x: this.head.x, y: this.__reduceY(this.head.y, 1, maxHeight) })
                 break
             case Direction.RIGHT:
-                this._body.unshift({ x: this._addX(this.head.x, 1), y: this.head.y })
+                this.__body.unshift({ x: this.__addX(this.head.x, 1, maxWidth), y: this.head.y })
                 break
             case Direction.DOWN:
-                this._body.unshift({ x: this.head.x, y: this._addY(this.head.y, 1) })
+                this.__body.unshift({ x: this.head.x, y: this.__addY(this.head.y, 1, maxHeight) })
                 break
             case Direction.LEFT:
-                this._body.unshift({ x: this._reduceX(this.head.x, 1), y: this.head.y })
+                this.__body.unshift({ x: this.__reduceX(this.head.x, 1, maxWidth), y: this.head.y })
                 break
         }
 
-        if (this._growSize === 0) {
-            this._body.pop()
+        if (this.__growSize === 0) {
+            this.__body.pop()
         } else {
-            --this._growSize
+            --this.__growSize
         }
     }
 
     grow(n) {
-        this._growSize += n
+        this.__growSize += n
     }
 
-    die() {
-        this._game.stop()
+    kill() {
+        this.__killed = true
+    }
+
+    __addX(x, n, max) {
+        return (x + n) % max
+    }
+
+    __addY(y, n, max) {
+        return (y + n) % max
+    }
+
+    __reduceX(x, n, max) {
+        if (x - n < 0)
+            return max + (x - n) % max
+        return x - n
+    }
+
+    __reduceY(y, n, max) {
+        if (y - n < 0)
+            return max + (y - n) % max
+        return y - n
     }
 }

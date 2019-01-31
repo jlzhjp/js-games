@@ -1,53 +1,60 @@
-export default class Game {
-    constructor(canvas) {
-        this._canvas = canvas
-        this._context = this._canvas.getContext('2d')
-        this._fps = 20
-        this._intervalId = null
-        this._onrefresh = []
-        this._stopped = false
+import Container from './container.js';
 
-        this._context.fillStyle = 'white'
-        // Initialize
-        this._context.fillRect(0, 0, this.mapWidth, this.mapHeight)
+export default class Game extends Container {
+    constructor(canvas) {
+        super()
+        this.__canvas = canvas
+        this.__context = this.__canvas.getContext('2d')
+        this.__tick = 50
+        this.__intervalId = null
+        this.__frameId = null
+        this.__stopped = false
+        this.__objects = []
+        this.__background = 'white'
     }
 
     get mapHeight() {
-        return this._canvas.height
+        return this.__canvas.height
     }
 
     get mapWidth() {
-        return this._canvas.width
-    }
-
-    get onrefresh() {
-        return this._onrefresh
-    }
-
-    // 事件相关
-    register(type, listener, options) {
-        window.addEventListener(type, listener, options)
-    }
-
-    unregister(type, listener, options) {
-        window.removeEventListener(type, listener, options)
+        return this.__canvas.width
     }
 
     start() {
-        if (this._stopped)
+        if (this.__stopped)
             throw Error('This game has stopped.')
-        this._intervalId = setInterval(() => {
-            for (let listener of this._onrefresh) {
-                listener(this._context)
+
+        this.__intervalId = setInterval(() => {
+            for (let obj of super._objects) {
+                obj.update({
+                    game: this,
+                })
             }
-        }, 1000 / this._fps)
+        }, this.__tick)
+
+        const loop = () => {
+            this.__context.fillStyle = this.__background
+            this.__context.fillRect(0, 0, this.mapWidth, this.mapHeight)
+
+            for (let obj of super._objects) {
+                obj.draw(this.__context)
+            }
+            this.__frameId = requestAnimationFrame(loop)
+        }
+
+        this.__frameId = requestAnimationFrame(loop)
     }
 
     pause() {
-        clearInterval(this._intervalId)
+        if (this.__intervalId)
+            clearInterval(this.__intervalId)
+        if (this.__frameId)
+            cancelAnimationFrame(this.__frameId)
     }
 
     stop() {
-        clearInterval(this._intervalId)
+        this.pause()
+        this.__stopped = true
     }
 }

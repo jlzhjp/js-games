@@ -1,36 +1,51 @@
-export default class Grid {
-    constructor(game, xLength, yLength) {
-        this._background = 'white'
-        this._height = game.mapHeight
-        this._width = game.mapWidth
-        this._xLength = xLength
-        this._yLength = yLength
-        this._cellWidth = this._width / xLength
-        this._cellHeight = this._height / yLength
-        this._onrefresh = []
+import Container from "./container.js"
 
-        game.onrefresh.push(context => {
-            context.fillStyle = this._background
-            context.fillRect(0, 0, this._width, this._height)
-            for (let listener of this._onrefresh) {
-                listener(this._getDrawingContext(context))
-            }
-        })
+export default class Grid extends Container {
+    constructor(gridWidth, gridHeight) {
+        super()
+        this.__background = 'white'
+        this.__gridWidth = gridWidth
+        this.__gridHeight = gridHeight
     }
 
-    get onrefresh() {
-        return this._onrefresh
+    update(args) {
+        for (let obj of super._objects) {
+            obj.update({
+                game: args.game,
+                gridWidth: this.__gridWidth,
+                gridHeight: this.__gridHeight,
+                occupiedCells: this.__getOccupiedCells(),
+            })
+        }
     }
 
-    get XLength() {
-        return this._xLength
+    draw(context) {
+        context.fillStyle = this.__background
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+        for (let obj of super._objects) {
+            obj.draw(this.__getGridDrawingContext(context))
+        }
     }
 
-    get YLength() {
-        return this._yLength
+    get gridWidth() {
+        return this.__gridWidth
     }
 
-    _getDrawingContext(context) {
+    get gridHeight() {
+        return this.__gridHeight
+    }
+
+    __getOccupiedCells() {
+        let res = []
+        for (let obj of super._objects) {
+            res.push(...obj.occupiedCells)
+        }
+        return res
+    }
+
+    __getGridDrawingContext(context) {
+        let cellWidth = context.canvas.width / this.__gridWidth,
+            cellHeight = context.canvas.height / this.__gridWidth
         return {
             set fillStyle(value) {
                 context.fillStyle = value
@@ -40,10 +55,10 @@ export default class Grid {
             },
             fillCell: (x, y) => {
                 context.fillRect(
-                    this._cellWidth * x,
-                    this._cellHeight * y,
-                    this._cellWidth,
-                    this._cellHeight
+                    cellWidth * x,
+                    cellHeight * y,
+                    cellWidth,
+                    cellHeight
                 )
             }
         }

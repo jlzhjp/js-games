@@ -1,13 +1,5 @@
-async function getInfo() {
-   let url = 'https://api.github.com/users/jlzhjp'
-   let res = await fetch(url)
-   let json = await res.json()
-   return json
+function jsonEquals(x, y) {
+    return JSON.stringify(x) === JSON.stringify(y)
 }
 
-async function getAvatarUrl() {
-    let userInfo = await getInfo()
-    return userInfo['avatar_url']
-}
-
-export { getAvatarUrl, }
+export { jsonEquals, }
