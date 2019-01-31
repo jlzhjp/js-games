@@ -1,4 +1,4 @@
-import * as Github from '../shared/github.js'
+import * as GitHub from '../shared/github.js'
 
 export default {
     template: `
@@ -9,7 +9,7 @@ export default {
                 </div>
             </div>
             <div class="right-group">
-                <a class="pure-button gh-button" href="https://www.github.com/jlzhjp">GitHub</a>
+                <a class="pure-button gh-button" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
                 <img id="gh-avatar" :src="avatarUrl" />
             </div>
         </nav>
@@ -20,7 +20,6 @@ export default {
         }
     },
     created: async function () {
-        this.avatarUrl = await Github.getAvatarUrl()
+        this.avatarUrl = await GitHub.getAvatarUrl()
     }
-    
 }
