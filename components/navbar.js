@@ -10,7 +10,7 @@ export default {
             </div>
             <div class="right-group">
                 <a class="pure-button gh-button" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
-                <img id="gh-avatar" :src="avatarUrl" />
+                <img class="gh-avatar" :src="avatarUrl" />
             </div>
         </nav>
     `,
