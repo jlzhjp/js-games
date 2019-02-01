@@ -1,4 +1,4 @@
-import Container from "./container.js"
+import Container from './container.js'
 
 export default class Grid extends Container {
     constructor(gridWidth, gridHeight) {
@@ -14,7 +14,7 @@ export default class Grid extends Container {
                 game: args.game,
                 gridWidth: this.__gridWidth,
                 gridHeight: this.__gridHeight,
-                occupiedCells: this.__getOccupiedCells(),
+                occupiedCells: this.__getOccupiedCells()
             })
         }
     }
@@ -54,12 +54,7 @@ export default class Grid extends Container {
                 return context.fillStyle
             },
             fillCell: (x, y) => {
-                context.fillRect(
-                    cellWidth * x,
-                    cellHeight * y,
-                    cellWidth,
-                    cellHeight
-                )
+                context.fillRect(cellWidth * x, cellHeight * y, cellWidth, cellHeight)
             }
         }
     }

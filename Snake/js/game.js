@@ -1,4 +1,4 @@
-import Container from './container.js';
+import Container from './container.js'
 
 export default class Game extends Container {
     constructor(canvas) {
@@ -22,13 +22,12 @@ export default class Game extends Container {
     }
 
     start() {
-        if (this.__stopped)
-            throw Error('This game has stopped.')
+        if (this.__stopped) throw Error('This game has stopped.')
 
         this.__intervalId = setInterval(() => {
             for (let obj of super._objects) {
                 obj.update({
-                    game: this,
+                    game: this
                 })
             }
         }, this.__tick)
@@ -47,10 +46,8 @@ export default class Game extends Container {
     }
 
     pause() {
-        if (this.__intervalId)
-            clearInterval(this.__intervalId)
-        if (this.__frameId)
-            cancelAnimationFrame(this.__frameId)
+        if (this.__intervalId) clearInterval(this.__intervalId)
+        if (this.__frameId) cancelAnimationFrame(this.__frameId)
     }
 
     stop() {

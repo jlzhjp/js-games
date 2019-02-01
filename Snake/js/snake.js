@@ -1,4 +1,4 @@
-import { jsonEquals, } from '../../shared/utils.js'
+import { jsonEquals } from '../../shared/utils.js'
 
 let Direction = Object.freeze({
     UP: 2,
@@ -9,13 +9,13 @@ let Direction = Object.freeze({
     getOpposite: direction => -direction,
     getDirectionByKey: key => {
         switch (key) {
-            case "ArrowUp":
+            case 'ArrowUp':
                 return Direction.UP
-            case "ArrowRight":
+            case 'ArrowRight':
                 return Direction.RIGHT
-            case "ArrowDown":
+            case 'ArrowDown':
                 return Direction.DOWN
-            case "ArrowLeft":
+            case 'ArrowLeft':
                 return Direction.LEFT
         }
     }
@@ -58,14 +58,13 @@ export default class Snake {
         return this.body
     }
 
-
     update(args) {
         if (this.__killed) {
             args.game.stop()
             return
         }
         this.move(args.gridWidth, args.gridHeight)
-        if (this.__body.slice(1).findIndex((p) => jsonEquals(this.head, p)) > -1) {
+        if (this.__body.slice(1).findIndex(p => jsonEquals(this.head, p)) > -1) {
             this.kill()
         }
         this.__keyLock = false
@@ -81,16 +80,28 @@ export default class Snake {
     move(maxWidth, maxHeight) {
         switch (this.__direction) {
             case Direction.UP:
-                this.__body.unshift({ x: this.head.x, y: this.__reduceY(this.head.y, 1, maxHeight) })
+                this.__body.unshift({
+                    x: this.head.x,
+                    y: this.__reduceY(this.head.y, 1, maxHeight)
+                })
                 break
             case Direction.RIGHT:
-                this.__body.unshift({ x: this.__addX(this.head.x, 1, maxWidth), y: this.head.y })
+                this.__body.unshift({
+                    x: this.__addX(this.head.x, 1, maxWidth),
+                    y: this.head.y
+                })
                 break
             case Direction.DOWN:
-                this.__body.unshift({ x: this.head.x, y: this.__addY(this.head.y, 1, maxHeight) })
+                this.__body.unshift({
+                    x: this.head.x,
+                    y: this.__addY(this.head.y, 1, maxHeight)
+                })
                 break
             case Direction.LEFT:
-                this.__body.unshift({ x: this.__reduceX(this.head.x, 1, maxWidth), y: this.head.y })
+                this.__body.unshift({
+                    x: this.__reduceX(this.head.x, 1, maxWidth),
+                    y: this.head.y
+                })
                 break
         }
 
@@ -118,14 +129,12 @@ export default class Snake {
     }
 
     __reduceX(x, n, max) {
-        if (x - n < 0)
-            return max + (x - n) % max
+        if (x - n < 0) return max + ((x - n) % max)
         return x - n
     }
 
     __reduceY(y, n, max) {
-        if (y - n < 0)
-            return max + (y - n) % max
+        if (y - n < 0) return max + ((y - n) % max)
         return y - n
     }
 }
