@@ -1,8 +1,9 @@
 [
     {
+        "id": "1",
         "name": "Snake",
         "url": "https://jlzhjp.github.io/js-games/Snake/",
         "cover": "https://raw.githubusercontent.com/jlzhjp/pictures/js-games/snake.png",
-        "projUrl": "https://github.com/jlzhjp/js-games/tree/master/Snake"
+        "projurl": "https://github.com/jlzhjp/js-games/tree/master/Snake"
     }
 ]
