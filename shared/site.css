@@ -1,8 +1,37 @@
-body {
+/* Global */
+
+html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #E8EAF6;
-    animation: 2s fadeInUp
+    font-size: 12px;
 }
+
+@media screen and (min-width: 48em) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 80em) {
+    html {
+        font-size: 18px;
+    }
+}
+
+body {
+    animation-duration: 1s;
+}
+
+/* Default Button */
+
+.button {
+    color: white;
+    white-space: nowrap;
+    background-color: #9FA8DA;
+    font-size: 1rem;
+}
+
+/* Navigator */
 
 .nav {
     display: flex;
@@ -23,6 +52,8 @@ nav>* {
     color: #B39DDB;
     flex-grow: 1;
 }
+
+/* Card */
 
 .card {
     background: #fff;
@@ -74,14 +105,6 @@ nav>* {
     color: #90CAF9
 }
 
-
-.button {
-    color: white;
-    white-space: nowrap;
-    background-color: #9FA8DA;
-    font-size: 1rem;
-}
-
 .avatar {
     border-radius: 50%;
     height: 2rem;
@@ -99,4 +122,58 @@ nav>* {
     cursor: pointer;
     overflow: hidden;
     background-color: white;
+}
+
+/* Preloader */
+
+.preloader-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader {
+    height: 100px;
+    width: 100px;
+    animation: spin 2s cubic-bezier(0.8, 0.1, 0.23, 0.93) infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.preloader::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    background-color: #90CAF9;
+    transform: translateX(11px) translateY(11px)
+}
+
+.preloader::after {
+    content: "";
+    display: block;
+    border: 3px solid #FCE4EC;
+    border-radius: 50%;
+    height: 94px;
+    width: 94px;
+}
+
+.preloader-text {
+    margin-top: 1rem;
+    color: #C5CAE9;
+    font-style: oblique;
 }

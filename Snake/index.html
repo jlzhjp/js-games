@@ -19,6 +19,17 @@
 </head>
 
 <body>
+    <div class="preloader-background">
+        <div class="preloader"></div>
+        <div class="preloader-text">Loading</div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            document.querySelector('.preloader-background').style.display = 'none'
+            document.querySelector('body').classList.add('fadeInUp')
+        })
+    </script>
+
     <div id="app">
         <nav-bar>Snake</nav-bar>
         <canvas id="maincanvas" class="card card-1" height="600" width="600"></canvas>
