@@ -3,33 +3,45 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JS Games🎮</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link rel="stylesheet" href="./shared/site.css" />
+
+    <style>
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <nav-bar>JavaScript Games</nav-bar>
+        <nav-bar>Games</nav-bar>
+        <div class="game-container">
+            <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+                <game-card 
+                    title="Snake"
+                    url="https://jlzhjp.github.io/js-games/Snake/"
+                    cover="https://raw.githubusercontent.com/jlzhjp/pictures/js-games/snake.png"
+                    projurl="https://github.com/jlzhjp/js-games/tree/master/Snake"></game-card>
+            </div>
+        </div>
     </div>
     <script type="module">
         import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0-beta.2/vue.esm.browser.js'
         import NavBar from './components/navbar.js'
+        import GameCard from './components/gamecard.js'
         import * as GitHub from './shared/github.js'
 
         new Vue({
             el: '#app',
             components: {
                 'nav-bar': NavBar,
+                'game-card': GameCard,
             }
         })
+    </script>
+</body>
 
-        const fun = async () => await GitHub.getAllGames()
-        fun()
-</script>
-    </body>
-    
-    </html>
+</html>

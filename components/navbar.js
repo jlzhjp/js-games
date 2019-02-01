@@ -3,15 +3,11 @@ import * as GitHub from '../shared/github.js'
 export default {
     template: `
         <nav class="nav">
-            <div class="left-group">
-                <div class="nav-heading">
-                    <slot></slot>
-                </div>
+            <div class="nav-heading">
+                <slot></slot>
             </div>
-            <div class="right-group">
-                <a class="pure-button gh-button" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
-                <img class="gh-avatar" :src="avatarUrl" />
-            </div>
+            <a class="button pure-button" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
+            <img class="avatar" :src="avatarUrl" />
         </nav>
     `,
     data: function () {

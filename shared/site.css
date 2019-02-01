@@ -1,78 +1,102 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #E8EAF6;
-  animation: 2s fadeInUp
-}
-
-.card {
-  background: #fff;
-  border-radius: 2px;
-}
-
-.card-1 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-}
-
-.card-1.hoverable:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.card-2 {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-}
-
-.card-2.hoverable:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.card-3 {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-
-.card-4 {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.card-5 {
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E8EAF6;
+    animation: 2s fadeInUp
 }
 
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 3rem;
-  height: 5rem;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .6);
-  display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    height: 5rem;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+}
+
+nav>* {
+    margin: auto 1rem;
 }
 
 .nav-heading {
-  font-size: 2rem;
-  color: #7E57C2;
+    font-size: 2rem;
+    color: #B39DDB;
+    flex-grow: 1;
 }
 
-.left-group, .right-group {
-  display: flex;
-  justify-content: space-around;
+.card {
+    background: #fff;
+    border-radius: 2px;
 }
 
-.right-group {
-  width: 10rem;
+.card-1 {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
-.gh-button {
-  color: white;
-  white-space: nowrap;
-  background-color: #9FA8DA;
-  font-size: 1rem;
+.card-1.hoverable:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.gh-avatar {
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
+.card-2 {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.card-2.hoverable:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.card-3 {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.card-4 {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.card-5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card-footer {
+    margin: 0.5rem 1rem;
+    display: flex;
+}
+
+.card-footer>* {
+    margin: auto 0.1rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    flex-grow: 1;
+    color: #90CAF9
+}
+
+
+.button {
+    color: white;
+    white-space: nowrap;
+    background-color: #9FA8DA;
+    font-size: 1rem;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+}
+
+.game-container {
+    display: flex;
+    margin: 1rem;
+    justify-content: flex-start;
+}
+
+.game-card {
+    margin: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: white;
 }
