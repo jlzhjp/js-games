@@ -35,8 +35,9 @@ export default class Snake {
                 return
             }
             let direction = Direction.getDirectionByKey(event.key)
-            if (direction !== Direction.getOpposite(this.__direction))
+            if (direction !== Direction.getOpposite(this.__direction)) {
                 this.__direction = direction
+            }
             this.__keyLock = true
         })
     }

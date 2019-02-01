@@ -12,7 +12,9 @@ export default class Food {
     }
 
     draw(context) {
-        if (this.__foodPosition == undefined) return
+        if (this.__foodPosition == undefined) {
+            return
+        }
         context.fillStyle = this.__color
         context.fillCell(this.__foodPosition.x, this.__foodPosition.y)
     }

@@ -46,8 +46,12 @@ export default class Game extends Container {
     }
 
     pause() {
-        if (this.__intervalId) clearInterval(this.__intervalId)
-        if (this.__frameId) cancelAnimationFrame(this.__frameId)
+        if (this.__intervalId) {
+            clearInterval(this.__intervalId)
+        }
+        if (this.__frameId) {
+            cancelAnimationFrame(this.__frameId)
+        }
     }
 
     stop() {
