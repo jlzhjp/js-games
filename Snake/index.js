@@ -5,13 +5,16 @@ import NavBar from '../components/navbar.js'
 import Swticher from '../components/switcher.js'
 import Shade from '../components/shade.js'
 import GameController from './lib/game_controller.js'
-import { hidePreloader } from '../shared/utils.js'
+import { hidePreloader, disableProductionTip, } from '../shared/utils.js'
+
+disableProductionTip(Vue)
 
 let vm = new Vue({
     el: '#app',
     data: function () {
         return {
-            show: 'new'
+            show: 'new',
+            score: null,
         }
     },
     computed: {
@@ -27,6 +30,10 @@ let vm = new Vue({
     methods: {
         startNew() {
             window.controller.startNew()
+            controller.onstop.push(() => {
+                this.score = window.controller.score
+                this.show = 'over'
+            })
             this.show = 'none'
         },
         start() {
@@ -35,12 +42,12 @@ let vm = new Vue({
         },
         pause() {
             window.controller.pause()
+            this.score = window.controller.score
             this.show = 'pause'
         },
     },
     mounted: function () {
         window.controller = new GameController(this.$refs.canvas)
-        controller.game.onstop.push(() => vm.show = 'over')
     }
 })
 

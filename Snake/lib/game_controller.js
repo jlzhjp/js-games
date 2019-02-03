@@ -8,15 +8,21 @@ import Food from './food.js'
 export default class GameController {
     constructor(canvas) {
         this.__canvas = canvas
-        this.__game = this.__createNewGame()
+        this.__game = null
     }
 
-    get game() {
-        return this.__game
+    get onstop() {
+        return this.__game.onstop
+    }
+
+    get score() {
+        return this.__game.score
     }
 
     startNew() {
-        this.__game.stop()
+        if (this.__game) {
+            this.__game.stop()
+        }
         this.__game = this.__createNewGame()
         this.__game.start()
     }

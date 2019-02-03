@@ -6,6 +6,7 @@ export default class Food {
     constructor(snake) {
         this.__snake = snake
         this.__color = '#FFCDD2'
+        this.__foodPosition = null
     }
 
     // Game Object
@@ -14,7 +15,7 @@ export default class Food {
     }
 
     draw(context) {
-        if (this.__foodPosition == undefined) {
+        if (!this.__foodPosition) {
             return
         }
         context.fillStyle = this.__color
@@ -22,7 +23,7 @@ export default class Food {
     }
 
     update(args) {
-        if (this.__foodPosition === undefined) {
+        if (!this.__foodPosition) {
             this.__updateFoodPosition(args)
         } else if (jsonEquals(this.__foodPosition, this.__snake.head)) {
             this.__snake.grow(1)
