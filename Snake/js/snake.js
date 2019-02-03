@@ -9,7 +9,7 @@ let Direction = Object.freeze({
     LEFT: -1,
 
     getOpposite: direction => -direction,
-    getDirectionByKey: key => {
+    getDirectionByArrowKey: key => {
         switch (key) {
             case 'ArrowUp':
                 return Direction.UP
@@ -33,10 +33,11 @@ export default class Snake {
         this.__keyLock = false
 
         window.addEventListener('keydown', event => {
-            if (this.__keyLock) {
+
+            if (this.__keyLock || !this.__isArrowKey(event.key)) {
                 return
             }
-            let direction = Direction.getDirectionByKey(event.key)
+            let direction = Direction.getDirectionByArrowKey(event.key)
             if (direction !== Direction.getOpposite(this.__direction)) {
                 this.__direction = direction
             }
@@ -121,6 +122,10 @@ export default class Snake {
 
     kill() {
         this.__killed = true
+    }
+
+    __isArrowKey(key) {
+        return /^Arrow\w+$/.test(key)
     }
 
     __addX(x, n, max) {
