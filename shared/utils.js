@@ -1,3 +1,5 @@
+'use strict'
+
 function jsonEquals(x, y) {
     return JSON.stringify(x) === JSON.stringify(y)
 }

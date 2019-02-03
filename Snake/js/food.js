@@ -1,3 +1,5 @@
+'use strict'
+
 import { jsonEquals, } from '../../shared/utils.js'
 
 export default class Food {

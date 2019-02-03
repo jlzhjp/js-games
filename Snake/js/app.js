@@ -1,3 +1,5 @@
+'use strict'
+
 import Game from './game.js'
 import Grid from './grid.js'
 import Snake from './snake.js'

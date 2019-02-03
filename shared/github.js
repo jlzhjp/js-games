@@ -1,3 +1,5 @@
+'use strict'
+
 let userUrl = 'https://api.github.com/users/jlzhjp'
 let repoUrl = 'https://api.github.com/repos/jlzhjp/js-games'
 

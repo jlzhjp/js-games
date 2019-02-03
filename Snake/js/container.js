@@ -1,3 +1,5 @@
+'use strict'
+
 export default class Container {
     constructor() {
         this.__objects = []

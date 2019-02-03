@@ -1,3 +1,5 @@
+'use strict'
+
 import { jsonEquals } from '../../shared/utils.js'
 
 let Direction = Object.freeze({
