@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JS Games🎮</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link rel="stylesheet" href="./shared/site.css" />
-
-    <style>
-    </style>
 </head>
 
 <body>
@@ -20,49 +16,16 @@
         <div class="preloader"></div>
         <div class="preloader-text">Loading</div>
     </div>
-    <script>
-        'use strict'
-
-        window.addEventListener('load', () => {
-            document.querySelector('.preloader-background').style.display = 'none'
-            document.querySelector('body').classList.add('fadeInUp')
-        })
-    </script>
-
     <div id="app">
         <nav-bar>Games</nav-bar>
-        <div class="game-container">
+        <div class="game-card-container">
             <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
                 <game-card v-for="game in games" :key="game.id" :title="game.name" :url="game.url" :cover="game.cover"
                     :projurl="game.projurl"></game-card>
             </div>
         </div>
     </div>
-    <script type="module">
-        'use strict'
-
-        import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0-beta.2/vue.esm.browser.js'
-        import NavBar from './components/navbar.js'
-        import GameCard from './components/gamecard.js'
-        import * as GitHub from './shared/github.js'
-
-
-        new Vue({
-            el: '#app',
-            components: {
-                'nav-bar': NavBar,
-                'game-card': GameCard,
-            },
-            data: function () {
-                return {
-                    games: null,
-                }
-            },
-            created: async function () {
-                this.games = await GitHub.getAllGames()
-            },
-        })
-    </script>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

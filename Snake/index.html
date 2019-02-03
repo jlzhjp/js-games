@@ -4,54 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" href="../shared/site.css" />
-
-    <style>
-        #maincanvas {
-            display: block;
-            margin: 1rem auto 0 auto
-        }
-    </style>
 </head>
 
 <body>
     <div class="preloader-background">
         <div class="preloader"></div>
-        <div class="preloader-text">Loading</div>
+        <div class="preloader-text">Loading...</div>
     </div>
-    <script>
-        'use strict'
-
-        window.addEventListener('load', () => {
-            document.querySelector('.preloader-background').style.display = 'none'
-            document.querySelector('body').classList.add('fadeInUp')
-        })
-    </script>
-
     <div id="app">
         <nav-bar>Snake</nav-bar>
-        <canvas id="maincanvas" class="card card-1" height="600" width="600"></canvas>
+        <div class="game-wrapper center">
+            <shade :show="showShade">
+                <canvas ref="canvas" class="card card-1" height="600" width="600"></canvas>
+                <switcher slot="shade-content" :show="show">
+                    <div class="control-panel" slot="new">
+                        <h2 class="control-panel-title text-primary">Snake</h2>
+                        <button class="pure-button button-secondary" @click="startNew()">Start</button>
+                    </div>
+
+                    <div class="control-panel" slot="pause">
+                        <h2 class="control-panel-title text-primary">Paused</h2>
+                        <button class="pure-button button-secondary" @click="start()">Continue</button>
+                        <button class="pure-button button-error" @click="startNew()">Restart</button>
+                    </div>
+
+                    <div class="control-panel" slot="over">
+                        <h2 class="control-panel-title text-primary">Game Over</h2>
+                        <button class="pure-button button-secondary" @click="startNew()">Restart</button>
+                    </div>
+                </switcher>
+            </shade>
+        </div>
     </div>
-    <script type="module">
-        'use strict'
-
-        import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0-beta.2/vue.esm.browser.js'
-        import NavBar from '../components/navbar.js'
-        import App from './js/app.js'
-
-        new Vue({
-            el: '#app',
-            components: {
-                'nav-bar': NavBar,
-            }
-        })
-
-        new App().main()
-    </script>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

@@ -11,8 +11,10 @@ export default class Game extends Container {
         this.__intervalId = null
         this.__frameId = null
         this.__stopped = false
+        this.__onstop = []
         this.__objects = []
         this.__background = 'white'
+        this.__score = 0
     }
 
     get mapHeight() {
@@ -23,14 +25,26 @@ export default class Game extends Container {
         return this.__canvas.width
     }
 
+    get onstop() {
+        return this.__onstop
+    }
+
+    get score() {
+        return this.__score
+    }
+
+    set score(value) {
+        this.__score = value
+    }
+
     start() {
-        if (this.__stopped) throw Error('This game has stopped.')
+        if (this.__stopped) {
+            throw new Error('This game has stopped.')
+        }
 
         this.__intervalId = setInterval(() => {
             for (let obj of super._objects) {
-                obj.update({
-                    game: this
-                })
+                obj.update({ game: this })
             }
         }, this.__tick)
 
@@ -59,5 +73,6 @@ export default class Game extends Container {
     stop() {
         this.pause()
         this.__stopped = true
+        this.__onstop.forEach(listener => listener())
     }
 }

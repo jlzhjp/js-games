@@ -24,26 +24,28 @@ export default class Food {
     update(args) {
         if (this.__foodPosition === undefined) {
             this.__updateFoodPosition(args)
-        } else if (this.__snake.occupiedCells.findIndex(
-            p => jsonEquals(this.__foodPosition, p)
-        ) > -1) {
+        } else if (jsonEquals(this.__foodPosition, this.__snake.head)) {
             this.__snake.grow(1)
             this.__updateFoodPosition(args)
+            args.game.score += 10
         }
     }
 
     __updateFoodPosition(args) {
         while (true) {
-            let x = this.__random(0, args.gridWidth),
-                y = this.__random(0, args.gridHeight)
-            if (!args.occupiedCells.includes({
-                x,
-                y
-            })) {
-                this.__foodPosition = { x, y }
+            let pos = {
+                x: this.__random(0, args.gridWidth),
+                y : this.__random(0, args.gridHeight),
+            }
+            if (!this.__isOccupied(pos, args)) {
+                this.__foodPosition = pos
                 break
             }
         }
+    }
+
+    __isOccupied(pos, args) {
+        return args.occupiedCells.findIndex(x => jsonEquals(x, pos)) > -1
     }
 
     __random(min, max) {

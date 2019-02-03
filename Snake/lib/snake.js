@@ -49,12 +49,12 @@ export default class Snake {
         return this.__body[0]
     }
 
-    get length() {
-        return this.__body.length
-    }
-
     get body() {
         return this.__body
+    }
+
+    get length() {
+        return this.__body.length
     }
 
     // Game Object
