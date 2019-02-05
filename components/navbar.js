@@ -4,15 +4,15 @@ import * as GitHub from '../shared/github.js'
 
 export default {
     template: `
-        <nav class="nav">
-            <div class="nav-heading text-primary">
-                <slot></slot>
-            </div>
-            <a class="pure-button button-primary" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
-            <img class="avatar" :src="avatarUrl" @click="openProfile()"/>
-        </nav>
+    <nav class="nav">
+        <div class="nav-heading text-primary">
+            <slot></slot>
+        </div>
+        <a class="pure-button button-primary" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
+        <img class="avatar" :src="avatarUrl" @click="openProfile()"/>
+    </nav>
     `,
-    data: function () {
+    data: () => {
         return {
             avatarUrl: null,
         }

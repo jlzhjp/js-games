@@ -18,29 +18,16 @@
     </div>
     <div id="app">
         <nav-bar>Snake</nav-bar>
-        <div class="game-wrapper center">
-            <shade :show="showShade">
+        <div class="game-wrapper">
+            <game-control
+                title="Snake" 
+                :over="game && game.state === 'stopped'"
+                :score="score"
+                @onstartnew="startNewGame()"
+                @onpause="pauseGame()"
+                @onstart="startGame()">
                 <canvas ref="canvas" class="card card-1" height="600" width="600"></canvas>
-                <switcher slot="shade-content" :show="show">
-                    <div class="control-panel" slot="new">
-                        <h2 class="control-panel-title text-primary">Snake</h2>
-                        <button class="pure-button button-secondary" @click="startNew()">Start</button>
-                    </div>
-
-                    <div class="control-panel" slot="pause">
-                        <h2 class="control-panel-title text-primary">Paused</h2>
-                        <div class="text-success">Current Score: {{ score }}</div>
-                        <button class="pure-button button-secondary" @click="start()">Continue</button>
-                        <button class="pure-button button-error" @click="startNew()">Restart</button>
-                    </div>
-
-                    <div class="control-panel" slot="over">
-                        <h2 class="control-panel-title text-primary">Game Over</h2>
-                        <div class="text-success">Your Score: {{ score }}</div>
-                        <button class="pure-button button-secondary" @click="startNew()">Restart</button>
-                    </div>
-                </switcher>
-            </shade>
+            </game-control>
         </div>
     </div>
     <script type="module" src="./index.js"></script>

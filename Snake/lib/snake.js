@@ -48,11 +48,9 @@ export default class Snake {
     get head() {
         return this.__body[0]
     }
-
     get body() {
         return this.__body
     }
-
     get length() {
         return this.__body.length
     }

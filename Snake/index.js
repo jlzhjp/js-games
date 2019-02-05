@@ -1,65 +1,57 @@
 'use strict'
 
-import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0-beta.3/vue.esm.browser.js'
+import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.min.js'
 import NavBar from '../components/navbar.js'
-import Swticher from '../components/switcher.js'
-import Shade from '../components/shade.js'
-import GameController from './lib/game_controller.js'
-import { hidePreloader, disableProductionTip, } from '../shared/utils.js'
-
-disableProductionTip(Vue)
+import GameControl from '../components/game_control.js'
+import Game from './lib/game.js'
+import Grid from './lib/grid.js'
+import Snake from './lib/snake.js'
+import Food from './lib/food.js'
+import { hidePreloader, } from '../shared/utils.js'
 
 let vm = new Vue({
     el: '#app',
-    data: function () {
+    components: {
+        'nav-bar': NavBar,
+        'game-control': GameControl,
+    },
+    data: () => {
         return {
-            show: 'new',
-            score: null,
+            game: null,
         }
     },
     computed: {
-        showShade() {
-            return this.show !== 'none'
-        }
-    },
-    components: {
-        'nav-bar': NavBar,
-        'shade': Shade,
-        'switcher': Swticher,
+        score() {
+            return this.game ? this.game.score : 0
+        },
     },
     methods: {
-        startNew() {
-            window.controller.startNew()
-            controller.onstop.push(() => {
-                this.score = window.controller.score
-                this.show = 'over'
-            })
-            this.show = 'none'
+        startNewGame() {
+            if (this.game && this.game.state !== 'stopped') {
+                this.game.stop()
+            }
+            this.game = this.__createNewGame(this.$refs.canvas)
+            this.game.start()
         },
-        start() {
-            window.controller.start()
-            this.show = 'none'
+        pauseGame() {
+            this.game.pause()
         },
-        pause() {
-            window.controller.pause()
-            this.score = window.controller.score
-            this.show = 'pause'
+        startGame() {
+            this.game.start()
+        },
+        __createNewGame(canvas) {
+            let game = new Game(canvas),
+                grid = new Grid(game.mapWidth / 15, game.mapHeight / 15),
+                snake = new Snake(3),
+                food = new Food(snake)
+
+            game.addObject(grid)
+            grid.addObject(snake)
+            grid.addObject(food)
+
+            return game
         },
     },
-    mounted: function () {
-        window.controller = new GameController(this.$refs.canvas)
-    }
 })
 
 window.addEventListener('load', () => hidePreloader())
-window.addEventListener('blur', () => {
-    if (vm.show === 'none') {
-        vm.pause()
-    }
-})
-window.addEventListener('keypress', event => {
-    event.preventDefault()
-    if (event.key === ' ' && vm.show === 'none') {
-        vm.pause()
-    }
-})

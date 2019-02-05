@@ -32,7 +32,6 @@ export default class Grid extends Container {
     get gridWidth() {
         return this.__gridWidth
     }
-
     get gridHeight() {
         return this.__gridHeight
     }

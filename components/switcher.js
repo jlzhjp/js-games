@@ -1,6 +1,6 @@
 'use strict'
 export default {
-    render(createElement) {
+    render() {
         if (this.show === 'none') {
             return null
         }
