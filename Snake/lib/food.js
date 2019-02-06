@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonEquals, } from '../../shared/utils.js'
+import { jsonEquals, random } from '../../shared/utils.js'
 
 export default class Food {
     constructor(snake) {
@@ -35,8 +35,8 @@ export default class Food {
     __updateFoodPosition(args) {
         while (true) {
             let pos = {
-                x: this.__random(0, args.gridWidth),
-                y : this.__random(0, args.gridHeight),
+                x: random(0, args.gridWidth),
+                y : random(0, args.gridHeight),
             }
             if (!this.__isOccupied(pos, args)) {
                 this.__foodPosition = pos
@@ -47,9 +47,5 @@ export default class Food {
 
     __isOccupied(pos, args) {
         return args.occupiedCells.findIndex(x => jsonEquals(x, pos)) > -1
-    }
-
-    __random(min, max) {
-        return min + ((Math.random() * (max - min)) | 0)
     }
 }

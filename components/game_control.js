@@ -1,7 +1,7 @@
 'use strict'
 
-import Shade from '../components/shade.js'
-import Swticher from '../components/switcher.js'
+import Shade from './shade.js'
+import Swticher from './switcher.js'
 
 export default {
     template: `

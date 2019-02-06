@@ -12,7 +12,6 @@ export default class Game extends Container {
         this.__context = this.__canvas.getContext('2d')
         this.__tick = 50
         this.__intervalId = null
-        this.__frameId = null
         this.__state = null
 
         this.__onstop= []
@@ -57,19 +56,15 @@ export default class Game extends Container {
             for (let obj of super._objects) {
                 obj.update({ game: this })
             }
-        }, this.__tick)
 
-        const loop = () => {
             this.__context.fillStyle = this.__background
             this.__context.fillRect(0, 0, this.mapWidth, this.mapHeight)
 
             for (let obj of super._objects) {
                 obj.draw(this.__context)
             }
-            this.__frameId = requestAnimationFrame(loop)
-        }
+        }, this.__tick)
 
-        this.__frameId = requestAnimationFrame(loop)
         this.__state = 'running'
     }
 
@@ -79,9 +74,7 @@ export default class Game extends Container {
         }
         if (this.__intervalId) {
             clearInterval(this.__intervalId)
-        }
-        if (this.__frameId) {
-            cancelAnimationFrame(this.__frameId)
+            this.__state = 'paused'
         }
     }
 

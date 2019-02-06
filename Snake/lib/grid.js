@@ -22,8 +22,6 @@ export default class Grid extends Container {
     }
 
     draw(context) {
-        context.fillStyle = this.__background
-        context.fillRect(0, 0, context.canvas.width, context.canvas.height)
         for (let obj of super._objects) {
             obj.draw(this.__getGridDrawingContext(context))
         }

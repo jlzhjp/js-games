@@ -9,7 +9,12 @@ function jsonEquals(x, y) {
     return JSON.stringify(x) === JSON.stringify(y)
 }
 
+function random(min, max) {
+    return min + ((Math.random() * (max - min)) | 0)
+}
+
 export {
     hidePreloader,
     jsonEquals,
+    random,
 }

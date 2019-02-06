@@ -9,7 +9,7 @@ import Snake from './lib/snake.js'
 import Food from './lib/food.js'
 import { hidePreloader, } from '../shared/utils.js'
 
-let vm = new Vue({
+new Vue({
     el: '#app',
     components: {
         'nav-bar': NavBar,
@@ -19,11 +19,6 @@ let vm = new Vue({
         return {
             game: null,
         }
-    },
-    computed: {
-        score() {
-            return this.game ? this.game.score : 0
-        },
     },
     methods: {
         startNewGame() {

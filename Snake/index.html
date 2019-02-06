@@ -22,7 +22,7 @@
             <game-control
                 title="Snake" 
                 :over="game && game.state === 'stopped'"
-                :score="score"
+                :score="this.game ? this.game.score : 0"
                 @onstartnew="startNewGame()"
                 @onpause="pauseGame()"
                 @onstart="startGame()">
