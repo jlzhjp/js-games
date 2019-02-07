@@ -5,7 +5,7 @@ import Container from './container.js'
 export default class Game extends Container {
     constructor(canvas) {
         if (Game.__has === true) {
-            throw 'Another instance is running.'
+            throw new Error('Another instance is running.')
         }
         super()
         this.__canvas = canvas
@@ -14,7 +14,7 @@ export default class Game extends Container {
         this.__intervalId = null
         this.__state = null
 
-        this.__onstop= []
+        this.__onstop = []
         this.__onscore = []
 
         this.__objects = []
@@ -49,7 +49,7 @@ export default class Game extends Container {
 
     start() {
         if (this.__state === 'stopped') {
-            throw 'This game has stopped.'
+            throw new Error('This game has stopped.')
         }
 
         this.__intervalId = setInterval(() => {

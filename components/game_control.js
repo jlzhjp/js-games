@@ -33,13 +33,13 @@ export default {
             type: String,
             required: true,
         },
-        over : {
-            type:Boolean,
+        over: {
+            type: Boolean,
             default: false,
         },
-        score:{
-            type:Number,
-            default:0,
+        score: {
+            type: Number,
+            default: 0,
         },
     },
     data: () => {

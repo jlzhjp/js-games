@@ -36,7 +36,7 @@ export default class Food {
         while (true) {
             let pos = {
                 x: random(0, args.gridWidth),
-                y : random(0, args.gridHeight),
+                y: random(0, args.gridHeight),
             }
             if (!this.__isOccupied(pos, args)) {
                 this.__foodPosition = pos

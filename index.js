@@ -1,5 +1,3 @@
-'use strict'
-
 import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.min.js'
 import NavBar from './components/navbar.js'
 import GameCard from './components/game_card.js'
@@ -22,4 +20,4 @@ new Vue({
     },
 })
 
-window.addEventListener('load', () =>  hidePreloader())
+window.addEventListener('load', () => hidePreloader())

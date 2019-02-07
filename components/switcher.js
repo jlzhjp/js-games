@@ -7,7 +7,7 @@ export default {
         return this.$slots[this.show]
     },
     props: {
-        show:{
+        show: {
             type: String,
             default: 'none',
         },

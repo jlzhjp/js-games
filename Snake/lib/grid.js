@@ -43,8 +43,8 @@ export default class Grid extends Container {
     }
 
     __getGridDrawingContext(context) {
-        let cellWidth = context.canvas.width / this.__gridWidth,
-            cellHeight = context.canvas.height / this.__gridWidth
+        let cellWidth = context.canvas.width / this.__gridWidth
+        let cellHeight = context.canvas.height / this.__gridWidth
         return {
             set fillStyle(value) {
                 context.fillStyle = value

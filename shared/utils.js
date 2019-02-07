@@ -13,8 +13,13 @@ function random(min, max) {
     return min + ((Math.random() * (max - min)) | 0)
 }
 
+function randomItem(arr) {
+    return arr[random(0, arr.length)]
+}
+
 export {
     hidePreloader,
     jsonEquals,
     random,
+    randomItem,
 }

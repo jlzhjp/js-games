@@ -1,5 +1,3 @@
-'use strict'
-
 import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.min.js'
 import NavBar from '../components/navbar.js'
 import GameControl from '../components/game_control.js'
@@ -35,10 +33,10 @@ new Vue({
             this.game.start()
         },
         __createNewGame(canvas) {
-            let game = new Game(canvas),
-                grid = new Grid(game.mapWidth / 15, game.mapHeight / 15),
-                snake = new Snake(3),
-                food = new Food(snake)
+            let game = new Game(canvas)
+            let grid = new Grid(game.mapWidth / 15, game.mapHeight / 15)
+            let snake = new Snake(3)
+            let food = new Food(snake)
 
             game.addObject(grid)
             grid.addObject(snake)

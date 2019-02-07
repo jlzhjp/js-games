@@ -19,6 +19,8 @@ let Direction = Object.freeze({
                 return Direction.DOWN
             case 'ArrowLeft':
                 return Direction.LEFT
+            default:
+                return null
         }
     }
 })
@@ -105,6 +107,8 @@ export default class Snake {
                     y: this.head.y
                 })
                 break
+            default:
+                throw new Error('Unkdown enum value.')
         }
 
         if (this.__growSize === 0) {
@@ -135,12 +139,16 @@ export default class Snake {
     }
 
     __reduceX(x, n, max) {
-        if (x - n < 0) return max + ((x - n) % max)
+        if (x - n < 0) {
+            return max + ((x - n) % max)
+        }
         return x - n
     }
 
     __reduceY(y, n, max) {
-        if (y - n < 0) return max + ((y - n) % max)
+        if (y - n < 0) {
+            return max + ((y - n) % max)
+        }
         return y - n
     }
 }
