@@ -12,7 +12,7 @@ async function getAvatarUrl() {
 
 async function getAllGames() {
     return await getJson(
-        'https://raw.githubusercontent.com/jlzhjp/js-games/master/gameinfo.json'
+        'https://raw.githubusercontent.com/jlzhjp/js-games/master/gamelist.json'
     )
 }
 export { getAvatarUrl, getAllGames }

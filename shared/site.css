@@ -221,6 +221,7 @@ nav>* {
     display: flex;
     margin: 1rem;
     justify-content: flex-start;
+    flex-flow: row wrap;
 }
 
 .game-card {
