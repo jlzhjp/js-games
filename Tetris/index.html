@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
+    <title>Tetris</title>
     <link rel="icon" href="../favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
@@ -17,16 +17,16 @@
         <div class="preloader-text">Loading...</div>
     </div>
     <div id="app">
-        <nav-bar>Snake</nav-bar>
+        <nav-bar>Tetris</nav-bar>
         <div class="game-wrapper">
             <game-control
-                title="Snake"
+                title="Tetris"
                 :over="game && game.state === 'stopped'"
                 :score="this.game ? this.game.score : 0"
                 @onstartnew="startNewGame()"
                 @onpause="pauseGame()"
                 @onstart="startGame()">
-                <canvas ref="canvas" class="card card-1" width="600" height="600"></canvas>
+                <canvas ref="canvas" class="card card-1" width="300" height="600"></canvas>
             </game-control>
         </div>
     </div>

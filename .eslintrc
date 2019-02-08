@@ -49,10 +49,6 @@
     "valid-jsdoc": 1,
     "valid-typeof": 2,
     "accessor-pairs": 2,
-    "complexity": [
-      2,
-      9
-    ],
     "curly": [
       2,
       "all"

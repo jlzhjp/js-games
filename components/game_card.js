@@ -1,5 +1,3 @@
-'use strict'
-
 export default {
     template: `
     <div class="card-1 hoverable game-card" @click="openGame()">

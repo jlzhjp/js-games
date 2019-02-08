@@ -1,5 +1,3 @@
-'use strict'
-
 import Shade from './shade.js'
 import Swticher from './switcher.js'
 

@@ -1,16 +1,14 @@
-'use strict'
-
-import Container from './container.js'
+import Container from '../Snake/lib/container.js'
 
 export default class Game extends Container {
-    constructor(canvas) {
+    constructor(canvas, tick = 50) {
         if (Game.__has === true) {
             throw new Error('Another instance is running.')
         }
         super()
         this.__canvas = canvas
         this.__context = this.__canvas.getContext('2d')
-        this.__tick = 50
+        this.__tick = tick
         this.__intervalId = null
         this.__state = null
 
@@ -41,7 +39,6 @@ export default class Game extends Container {
     get score() {
         return this.__score
     }
-
     set score(value) {
         this.__score = value
         this.onscore.forEach((listener) => listener(this.score))
@@ -51,19 +48,22 @@ export default class Game extends Container {
         if (this.__state === 'stopped') {
             throw new Error('This game has stopped.')
         }
-
         this.__intervalId = setInterval(() => {
             for (let obj of super._objects) {
                 obj.update({ game: this })
             }
+        }, this.__tick)
 
+        let loop = () => {
             this.__context.fillStyle = this.__background
             this.__context.fillRect(0, 0, this.mapWidth, this.mapHeight)
 
             for (let obj of super._objects) {
                 obj.draw(this.__context)
             }
-        }, this.__tick)
+            this.__frameId = requestAnimationFrame(loop)
+        }
+        loop()
 
         this.__state = 'running'
     }
@@ -74,7 +74,9 @@ export default class Game extends Container {
         }
         if (this.__intervalId) {
             clearInterval(this.__intervalId)
-            this.__state = 'paused'
+        }
+        if (this.__frameId) {
+            cancelAnimationFrame(this.__frameId)
         }
     }
 

@@ -2,8 +2,6 @@ import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browse
 import NavBar from '../components/navbar.js'
 import GameControl from '../components/game_control.js'
 import Grid from './lib/grid.js'
-import Snake from './lib/snake.js'
-import Food from './lib/food.js'
 import Game from '../shared/game.js'
 import { hidePreloader, } from '../shared/utils.js'
 
@@ -33,15 +31,9 @@ new Vue({
             this.game.start()
         },
         __createNewGame(canvas) {
-            let game = new Game(canvas)
-            let grid = new Grid(game.mapWidth / 15, game.mapHeight / 15)
-            let snake = new Snake(3)
-            let food = new Food(snake)
-
+            let game = new Game(canvas, 400)
+            let grid = new Grid()
             game.addObject(grid)
-            grid.addObject(snake)
-            grid.addObject(food)
-
             return game
         },
     },

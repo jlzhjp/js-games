@@ -1,5 +1,3 @@
-'use strict'
-
 let userUrl = 'https://api.github.com/users/jlzhjp'
 
 async function getJson(url) {

@@ -1,5 +1,3 @@
-'use strict'
-
 import Container from './container.js'
 
 export default class Grid extends Container {

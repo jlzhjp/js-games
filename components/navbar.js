@@ -1,5 +1,3 @@
-'use strict'
-
 import * as GitHub from '../shared/github.js'
 
 export default {
