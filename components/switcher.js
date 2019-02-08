@@ -1,4 +1,3 @@
-'use strict'
 export default {
     render() {
         if (this.show === 'none') {

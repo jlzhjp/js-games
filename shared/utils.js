@@ -1,5 +1,3 @@
-'use strict'
-
 function hidePreloader() {
     document.querySelector('.preloader-background').style.display = 'none'
     document.querySelector('body').classList.add('fadeInUp')

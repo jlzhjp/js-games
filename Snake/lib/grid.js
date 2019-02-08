@@ -1,4 +1,4 @@
-import Container from './container.js'
+import Container from '../../shared/container.js'
 
 export default class Grid extends Container {
     constructor(gridWidth, gridHeight) {

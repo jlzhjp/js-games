@@ -1,5 +1,3 @@
-'use strict'
-
 import { jsonEquals, randomInt } from '../../shared/utils.js'
 
 export default class Food {

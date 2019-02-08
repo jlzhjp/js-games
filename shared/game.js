@@ -1,4 +1,4 @@
-import Container from '../Snake/lib/container.js'
+import Container from './container.js'
 
 export default class Game extends Container {
     constructor(canvas, tick = 50) {
