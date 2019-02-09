@@ -1,0 +1,16 @@
+{
+  "editor.tabSize": 2,
+  "standard.options": {
+    "globals": [
+      "$",
+      "jQuery",
+      "fetch"
+    ],
+    "ignore": [
+      "node_modules/**"
+    ],
+    "plugins": [],
+    "parser": "babel-eslint",
+    "envs": [],
+  },
+}
