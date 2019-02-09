@@ -45,24 +45,6 @@ export default class Grid {
       ctx.fillRect(pos.x * cellWidth, pos.y * cellHeight, cellWidth, cellHeight)
     }
 
-    // Draw lines
-    // Horizontal
-    ctx.strokeStyle = this.__lineColor
-    for (let i = 1; i < this.__gridHeight; ++i) {
-      ctx.beginPath()
-      ctx.moveTo(0, i * cellHeight)
-      ctx.lineTo(mapWidth, i * cellHeight)
-      ctx.stroke()
-    }
-
-    // Vertical
-    for (let i = 1; i < this.__gridWidth; ++i) {
-      ctx.beginPath()
-      ctx.moveTo(i * cellWidth, 0)
-      ctx.lineTo(i * cellWidth, mapHeight)
-      ctx.stroke()
-    }
-
     // Draw fixed blocks
     for (let y = 0; y < this.__gridHeight; ++y) {
       for (let x = 0; x < this.__gridWidth; ++x) {
@@ -84,6 +66,24 @@ export default class Grid {
           fillCell({ x: pos.x + x, y: pos.y + y })
         }
       }
+    }
+
+    // Draw lines
+    // Horizontal
+    ctx.strokeStyle = this.__lineColor
+    for (let i = 1; i < this.__gridHeight; ++i) {
+      ctx.beginPath()
+      ctx.moveTo(0, i * cellHeight)
+      ctx.lineTo(mapWidth, i * cellHeight)
+      ctx.stroke()
+    }
+
+    // Vertical
+    for (let i = 1; i < this.__gridWidth; ++i) {
+      ctx.beginPath()
+      ctx.moveTo(i * cellWidth, 0)
+      ctx.lineTo(i * cellWidth, mapHeight)
+      ctx.stroke()
     }
   }
 
@@ -165,7 +165,7 @@ export default class Grid {
       }
     }
   }
-  __getFixedBloks (x, y) {
+  __getFixedBlocks (x, y) {
     if (x < 0 || x >= this.__gridWidth || y < 0 || y >= this.__gridHeight) {
       return null
     }
@@ -180,7 +180,7 @@ export default class Grid {
         if (matrix[y][x] && (pos.x + x < 0 ||
           pos.x + x >= this.__gridWidth ||
           pos.y + y >= this.__gridHeight ||
-          this.__getFixedBloks(pos.x + x, pos.y + y))) {
+          this.__getFixedBlocks(pos.x + x, pos.y + y))) {
           return false
         }
       }
