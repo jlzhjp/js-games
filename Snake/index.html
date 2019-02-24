@@ -19,8 +19,8 @@
   <div id="app">
     <nav-bar>Snake</nav-bar>
     <div class="game-wrapper">
-      <game-control title="Snake" :over="game && game.state === 'stopped'" :score="this.game ? this.game.score : 0"
-        @onstartnew="startNewGame()" @onpause="pauseGame()" @onstart="startGame()">
+      <game-control title="Snake" :score="score" :show="show" @onstart="startGame()" @onpause="pauseGame()"
+        @onresume="resumeGame()" @onrestart="restartGame()">
         <canvas ref="canvas" class="card card-1" width="600" height="600"></canvas>
       </game-control>
     </div>

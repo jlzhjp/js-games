@@ -1,6 +1,6 @@
 export default class Container {
   constructor () {
-    this.__objects = []
+    this.__objects = [ ]
   }
 
   get _objects () {
@@ -13,5 +13,13 @@ export default class Container {
 
   removeObject (obj) {
     this.__objects.splice(this.__objects.indexOf(obj), 1)
+  }
+
+  drawAll (args) {
+    this.__objects.forEach(obj => obj.draw(args))
+  }
+
+  updateAll (args) {
+    this.__objects.forEach(obj => obj.update(args))
   }
 }

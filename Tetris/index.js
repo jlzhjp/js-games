@@ -1,40 +1,58 @@
-import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.min.js'
+import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.js'
 import NavBar from '../components/navbar.js'
-import GameControl from '../components/game_control.js'
+import GameControl from '../components/gameControl.js'
 import Grid from './lib/grid.js'
 import Game from '../shared/game.js'
+import GameState from '../shared/gameState.js'
 import { hidePreloader } from '../shared/utils.js'
+
+window.addEventListener('load', () => hidePreloader())
+
+window.game = null
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: {
-    'nav-bar': NavBar,
-    'game-control': GameControl
+    NavBar,
+    GameControl
   },
   data: () => {
     return {
-      game: null
+      score: 0,
+      show: 'new'
     }
   },
   methods: {
-    startNewGame () {
-      if (this.game && this.game.state !== 'stopped') {
-        this.game.stop()
-      }
-      this.game = this.__createNewGame(this.$refs.canvas)
-      this.game.start()
+    startGame () {
+      window.game = this.__createNewGame(this.$refs.canvas)
+      window.game.start()
+      this.show = 'none'
     },
     pauseGame () {
-      this.game.pause()
+      window.game.pause()
+      this.show = 'pause'
     },
-    startGame () {
-      this.game.start()
+    resumeGame () {
+      window.game.resume()
+      this.show = 'none'
+    },
+    restartGame () {
+      // Clean Up
+      if (window.game && window.game.state !== GameState.STOPPED) {
+        window.game.stop()
+      }
+      this.score = 0
+      this.show = 'new'
     },
     __createNewGame (canvas) {
       let game = new Game(canvas, 400)
       let grid = new Grid()
       game.addObject(grid)
+
+      game.onstop.on(() => { this.show = 'over' })
+      game.onscore.on((e) => { this.score = e.score })
+
       return game
     }
   }

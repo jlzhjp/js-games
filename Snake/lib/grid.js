@@ -9,20 +9,16 @@ export default class Grid extends Container {
   }
 
   update (args) {
-    for (let obj of super._objects) {
-      obj.update({
-        game: args.game,
-        gridWidth: this.__gridWidth,
-        gridHeight: this.__gridHeight,
-        occupiedCells: this.__getOccupiedCells()
-      })
-    }
+    this.updateAll({
+      game: args.game,
+      gridWidth: this.__gridWidth,
+      gridHeight: this.__gridHeight,
+      occupiedCells: this.__getOccupiedCells()
+    })
   }
 
   draw (context) {
-    for (let obj of super._objects) {
-      obj.draw(this.__getGridDrawingContext(context))
-    }
+    this.drawAll(this.__getGridDrawingContext(context))
   }
 
   get gridWidth () {

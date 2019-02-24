@@ -1,26 +1,11 @@
 import { jsonEquals } from '../../shared/utils.js'
+import Enum from '../../extensions/enum.js'
 
-let Direction = Object.freeze({
+let Direction = Enum({
   UP: 2,
   RIGHT: 1,
   DOWN: -2,
-  LEFT: -1,
-
-  getOpposite: direction => -direction,
-  getDirectionByArrowKey: key => {
-    switch (key) {
-      case 'ArrowUp':
-        return Direction.UP
-      case 'ArrowRight':
-        return Direction.RIGHT
-      case 'ArrowDown':
-        return Direction.DOWN
-      case 'ArrowLeft':
-        return Direction.LEFT
-      default:
-        return null
-    }
-  }
+  LEFT: -1
 })
 
 export default class Snake {
@@ -36,8 +21,8 @@ export default class Snake {
       if (this.__keyLock || !this.__isArrowKey(event.key)) {
         return
       }
-      let direction = Direction.getDirectionByArrowKey(event.key)
-      if (direction !== Direction.getOpposite(this.__direction)) {
+      let direction = this.__getDirectionByArrowKey(event.key)
+      if (direction !== this.__getOppositeDirection(this.__direction)) {
         this.__direction = direction
       }
       this.__keyLock = true
@@ -147,5 +132,24 @@ export default class Snake {
       return max + ((y - n) % max)
     }
     return y - n
+  }
+
+  __getOppositeDirection (direction) {
+    return -direction
+  }
+
+  __getDirectionByArrowKey (key) {
+    switch (key) {
+      case 'ArrowUp':
+        return Direction.UP
+      case 'ArrowRight':
+        return Direction.RIGHT
+      case 'ArrowDown':
+        return Direction.DOWN
+      case 'ArrowLeft':
+        return Direction.LEFT
+      default:
+        return null
+    }
   }
 }
