@@ -1,8 +1,10 @@
 import { randomItem, randomInt } from '../../shared/utils.js'
+import Coordinate from '../../extensions/coordinate.js'
 
 export default class Brick {
   static get bricks () {
-    let O = true; let _ = false
+    let O = true
+    let _ = false
     return [
       {
         color: '#E1BEE7',
@@ -56,10 +58,7 @@ export default class Brick {
   }
   static random (width) {
     let item = randomItem(Brick.bricks)
-    item.position = {
-      x: randomInt(0, width - item.matrix.length),
-      y: -item.matrix.length
-    }
+    item.position = new Coordinate(randomInt(0, width - item.matrix.length), -item.matrix.length)
     return new Brick(item)
   }
 

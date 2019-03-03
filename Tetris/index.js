@@ -4,6 +4,7 @@ import GameControl from '../components/gameControl.js'
 import Grid from './lib/grid.js'
 import Game from '../shared/game.js'
 import GameState from '../shared/gameState.js'
+import EventCenter from '../shared/eventCenter.js'
 import { hidePreloader } from '../shared/utils.js'
 
 window.addEventListener('load', () => hidePreloader())
@@ -46,12 +47,12 @@ new Vue({
       this.show = 'new'
     },
     __createNewGame (canvas) {
-      let game = new Game(canvas, 400)
-      let grid = new Grid()
-      game.addObject(grid)
+      let event = new EventCenter()
+      let game = new Game(event, canvas, 400)
+      new Grid(event)
 
-      game.onstop.on(() => { this.show = 'over' })
-      game.onscore.on((e) => { this.score = e.score })
+      event.listen('stop', () => { this.show = 'over' })
+      event.listen('score', (args) => { this.score += args.score })
 
       return game
     }

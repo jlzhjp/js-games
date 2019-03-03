@@ -1,24 +1,38 @@
-import Container from '../../shared/container.js'
-
-export default class Grid extends Container {
-  constructor (gridWidth, gridHeight) {
-    super()
+export default class Grid {
+  constructor (event, gridWidth, gridHeight) {
     this.__background = 'white'
     this.__gridWidth = gridWidth
     this.__gridHeight = gridHeight
-  }
+    this.__event = event
+    this.__occupiedCells = []
 
-  update (args) {
-    this.updateAll({
-      game: args.game,
-      gridWidth: this.__gridWidth,
-      gridHeight: this.__gridHeight,
-      occupiedCells: this.__getOccupiedCells()
+    this.__event.register('occupycell')
+    this.__event.register('releasecell')
+    this.__event.register('gridupdate')
+    this.__event.register('gridredraw')
+
+    this.__event.listen('update', (args) => this.update(args))
+    this.__event.listen('redraw', (args) => this.draw(args))
+    this.__event.listen('occupycell', (args) => {
+      this.__occupiedCells.push(args.cell)
+    })
+    this.__event.listen('releasecell', (args) => {
+      let index = this.__occupiedCells.findIndex((pos) => pos.equals(args.cell))
+      this.__occupiedCells.splice(index, 1)
     })
   }
 
-  draw (context) {
-    this.drawAll(this.__getGridDrawingContext(context))
+  update (args) {
+    this.__event.trigger('gridupdate', {
+      game: args.game,
+      gridWidth: this.__gridWidth,
+      gridHeight: this.__gridHeight,
+      occupiedCells: this.__occupiedCells
+    })
+  }
+
+  draw (args) {
+    this.__event.trigger('gridredraw', { context: this.__getGridDrawingContext(args.context) })
   }
 
   get gridWidth () {
@@ -26,14 +40,6 @@ export default class Grid extends Container {
   }
   get gridHeight () {
     return this.__gridHeight
-  }
-
-  __getOccupiedCells () {
-    let res = []
-    for (let obj of super._objects) {
-      res.push(...obj.occupiedCells)
-    }
-    return res
   }
 
   __getGridDrawingContext (context) {

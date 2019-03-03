@@ -1,27 +1,31 @@
-import Container from './container.js'
 import GameState from './gameState.js'
-import Event from '../extensions/event.js'
 
-export default class Game extends Container {
-  constructor (canvas, tick = 50) {
+export default class Game {
+  constructor (event, canvas, tick = 50) {
     if (Game.__has === true) {
       throw new Error('Another instance is running.')
     }
-    super()
     this.__canvas = canvas
     this.__context = this.__canvas.getContext('2d')
     this.__tick = tick
     this.__intervalId = null
     this.__frameId = null
     this.__state = GameState.INIT
+    this.__event = event
 
     this.__objects = []
     this.__background = 'white'
     this.__score = 0
     Game.__has = true
 
-    this.onstop = new Event()
-    this.onscore = new Event()
+    this.__event.register('stop')
+    this.__event.register('score')
+    this.__event.register('redraw')
+    this.__event.register('update')
+
+    this.__event.listen('score', (args) => {
+      this.__score += args.score
+    })
   }
 
   get mapHeight () {
@@ -37,8 +41,7 @@ export default class Game extends Container {
     return this.__score
   }
   set score (value) {
-    this.__score = value
-    this.onscore.trigger({ score: this.__score })
+    this.event.trigger('score', { score: value - this.__score })
   }
 
   start () {
@@ -71,21 +74,21 @@ export default class Game extends Container {
       return
     }
     this.pause()
-    this.onstop.trigger()
+    this.__event.trigger('stop', { })
     this.__state = GameState.STOPPED
     Game.__has = false
   }
 
   __boot () {
     this.__intervalId = setInterval(() => {
-      this.updateAll({ game: this })
+      this.__event.trigger('update', { game: this })
     }, this.__tick)
 
     let loop = () => {
       this.__context.fillStyle = this.__background
       this.__context.fillRect(0, 0, this.mapWidth, this.mapHeight)
 
-      this.drawAll(this.__context)
+      this.__event.trigger('redraw', { context: this.__context })
       this.__frameId = window.requestAnimationFrame(loop)
     }
     loop()

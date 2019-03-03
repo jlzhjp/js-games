@@ -1,4 +1,4 @@
-import { jsonEquals } from '../../shared/utils.js'
+import Coordinate from '../../extensions/coordinate.js'
 import Enum from '../../extensions/enum.js'
 
 let Direction = Enum({
@@ -9,13 +9,19 @@ let Direction = Enum({
 })
 
 export default class Snake {
-  constructor (initLen) {
-    this.__body = [{ x: 0, y: 0 }]
+  constructor (event) {
+    this.__body = [ new Coordinate(0, 0) ]
     this.__direction = Direction.RIGHT
-    this.__growSize = initLen
+    this.__growSize = 3
     this.__killed = false
     this.__color = '#9AC9E7'
     this.__keyLock = false
+    this.__event = event
+
+    this.__event.register('snakemove')
+
+    this.__event.listen('gridupdate', (args) => this.update(args))
+    this.__event.listen('gridredraw', (args) => this.draw(args))
 
     window.addEventListener('keydown', event => {
       if (this.__keyLock || !this.__isArrowKey(event.key)) {
@@ -39,62 +45,57 @@ export default class Snake {
     return this.__body.length
   }
 
-  // Game Object
-  get occupiedCells () {
-    return this.body
-  }
-
   update (args) {
     if (this.__killed) {
       args.game.stop()
       return
     }
-    this.move(args.gridWidth, args.gridHeight)
-    if (this.__body.slice(1).findIndex(p => jsonEquals(this.head, p)) > -1) {
+    this.move(args)
+    if (this.__body.slice(1).findIndex(p => p.equals(this.head)) > -1) {
       this.kill()
     }
     this.__keyLock = false
   }
 
-  draw (context) {
-    context.fillStyle = this.__color
+  draw (args) {
+    args.context.fillStyle = this.__color
     for (let point of this.__body) {
-      context.fillCell(point.x, point.y)
+      args.context.fillCell(point.x, point.y)
     }
   }
 
-  move (maxWidth, maxHeight) {
+  move (args) {
+    let maxWidth = args.gridWidth
+    let maxHeight = args.gridHeight
+    let newHead = null
     switch (this.__direction) {
       case Direction.UP:
-        this.__body.unshift({
-          x: this.head.x,
-          y: this.__reduceY(this.head.y, 1, maxHeight)
-        })
+        newHead = new Coordinate(this.head.x, this.__reduceY(this.head.y, 1, maxHeight))
         break
       case Direction.RIGHT:
-        this.__body.unshift({
-          x: this.__addX(this.head.x, 1, maxWidth),
-          y: this.head.y
-        })
+        newHead = new Coordinate(this.__addX(this.head.x, 1, maxWidth), this.head.y)
         break
       case Direction.DOWN:
-        this.__body.unshift({
-          x: this.head.x,
-          y: this.__addY(this.head.y, 1, maxHeight)
-        })
+        newHead = new Coordinate(this.head.x, this.__addY(this.head.y, 1, maxHeight))
         break
       case Direction.LEFT:
-        this.__body.unshift({
-          x: this.__reduceX(this.head.x, 1, maxWidth),
-          y: this.head.y
-        })
+        newHead = new Coordinate(this.__reduceX(this.head.x, 1, maxWidth), this.head.y)
         break
       default:
         throw new Error('Unkdown enum value.')
     }
 
+    this.__body.unshift(newHead)
+    this.__event.trigger('occupycell', { cell: newHead })
+    this.__event.trigger('snakemove', {
+      snake: this,
+      maxWidth,
+      maxHeight,
+      occupiedCells: args.occupiedCells
+    })
+
     if (this.__growSize === 0) {
-      this.__body.pop()
+      this.__event.trigger('releasecell', { cell: this.__body.pop() })
     } else {
       --this.__growSize
     }
@@ -149,7 +150,7 @@ export default class Snake {
       case 'ArrowLeft':
         return Direction.LEFT
       default:
-        return null
+        throw new Error('Is not an arrow key.')
     }
   }
 }

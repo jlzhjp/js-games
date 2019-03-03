@@ -7,6 +7,7 @@ import Food from './lib/food.js'
 import Game from '../shared/game.js'
 import GameState from '../shared/gameState.js'
 import { hidePreloader } from '../shared/utils.js'
+import EventCenter from '../shared/eventCenter.js'
 
 window.addEventListener('load', () => hidePreloader())
 
@@ -48,17 +49,14 @@ new Vue({
       this.show = 'new'
     },
     __createNewGame (canvas) {
-      let game = new Game(canvas)
-      let grid = new Grid(game.mapWidth / 15, game.mapHeight / 15)
-      let snake = new Snake(3)
-      let food = new Food(snake)
+      let event = new EventCenter()
+      let game = new Game(event, canvas)
+      new Grid(event, game.mapWidth / 15, game.mapHeight / 15)
+      new Snake(event)
+      new Food(event)
 
-      game.addObject(grid)
-      grid.addObject(snake)
-      grid.addObject(food)
-
-      game.onstop.on(() => { this.show = 'over' })
-      game.onscore.on((e) => { this.score = e.score })
+      event.listen('stop', (_) => { this.show = 'over' })
+      event.listen('score', (args) => { this.score += args.score })
 
       return game
     }

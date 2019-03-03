@@ -1,16 +1,21 @@
 import Brick from './brick.js'
 
 export default class Grid {
-  constructor () {
+  constructor (event) {
     this.__fixedBlocks = []
     this.__currentBrick = this.__nextBrick()
     this.__gridWidth = 12
-    this.__lineColor = '#EEEEEE'
+    this.__lineColor = '#E0F2F1'
     this.__gridHeight = 24
     this.__lost = false
     for (let y = 0; y < this.__gridHeight; ++y) {
       this.__fixedBlocks.push(this.__createEmptyRow())
     }
+    this.__event = event
+
+    this.__event.listen('redraw', (args) => this.draw(args))
+    this.__event.listen('update', (args) => this.update(args))
+
     window.addEventListener('keydown', (event) => this.act(event.key))
   }
 
@@ -32,7 +37,8 @@ export default class Grid {
         break
     }
   }
-  draw (ctx) {
+  draw (args) {
+    let ctx = args.context
     if (!this.__currentBrick) {
       return
     }
@@ -41,8 +47,8 @@ export default class Grid {
     let cellWidth = mapWidth / this.__gridWidth
     let cellHeight = mapHeight / this.__gridHeight
 
-    let fillCell = (pos) => {
-      ctx.fillRect(pos.x * cellWidth, pos.y * cellHeight, cellWidth, cellHeight)
+    let fillCell = (x, y) => {
+      ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight)
     }
 
     // Draw fixed blocks
@@ -50,7 +56,7 @@ export default class Grid {
       for (let x = 0; x < this.__gridWidth; ++x) {
         if (this.__fixedBlocks[y][x]) {
           ctx.fillStyle = this.__fixedBlocks[y][x]
-          fillCell({ x, y })
+          fillCell(x, y)
         }
       }
     }
@@ -63,7 +69,7 @@ export default class Grid {
     for (let y = 0; y < n; ++y) {
       for (let x = 0; x < n; ++x) {
         if (matrix[y][x]) {
-          fillCell({ x: pos.x + x, y: pos.y + y })
+          fillCell(pos.x + x, pos.y + y)
         }
       }
     }
@@ -95,7 +101,7 @@ export default class Grid {
       if (this.__fixedBlocks[y].every(val => val !== null)) {
         this.__fixedBlocks.splice(y, 1)
         this.__fixedBlocks.unshift(this.__createEmptyRow())
-        args.game.score += 10
+        this.__event.trigger('score', { score: 10 })
       }
     }
     this.__moveDown()

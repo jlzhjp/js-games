@@ -19,7 +19,7 @@
   <div id="app">
     <nav-bar>Tetris</nav-bar>
     <div class="game-wrapper">
-      <game-control title="Snake" :score="score" :show="show" @onstart="startGame()" @onpause="pauseGame()"
+      <game-control title="Tetris" :score="score" :show="show" @onstart="startGame()" @onpause="pauseGame()"
         @onresume="resumeGame()" @onrestart="restartGame()">
         <canvas ref="canvas" class="card card-1" width="300" height="600"></canvas>
       </game-control>
