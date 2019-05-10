@@ -1,4 +1,3 @@
-import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browser.min.js'
 import NavBar from '../components/navbar.js'
 import GameControl from '../components/gameControl.js'
 import Grid from './lib/grid.js'

@@ -1,5 +1,3 @@
-import * as GitHub from '../shared/github.js'
-
 export default {
   template: `
     <nav class="nav">
@@ -7,20 +5,12 @@ export default {
         <slot></slot>
       </div>
       <a class="pure-button button-primary" href="https://www.github.com/jlzhjp/js-games">GitHub</a>
-      <img class="avatar" :src="avatarUrl" @click="openProfile()"/>
+      <img class="avatar" src="https://avatars3.githubusercontent.com/u/35339647?s=460&v=4" @click="openProfile()"/>
     </nav>
     `,
-  data: () => {
-    return {
-      avatarUrl: null
-    }
-  },
   methods: {
     openProfile () {
       window.open('https://github.com/jlzhjp', '_self')
     }
-  },
-  created: async function () {
-    this.avatarUrl = await GitHub.getAvatarUrl()
   }
 }

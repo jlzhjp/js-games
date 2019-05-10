@@ -2,7 +2,7 @@ import Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.esm.browse
 import NavBar from './components/navbar.js'
 import GameCard from './components/gameCard.js'
 import { hidePreloader } from './shared/utils.js'
-import * as GitHub from './shared/github.js'
+import { games } from './shared/api.js'
 
 /* eslint-disable no-new */
 new Vue({
@@ -13,11 +13,8 @@ new Vue({
   },
   data: function () {
     return {
-      games: null
+      games
     }
-  },
-  created: async function () {
-    this.games = await GitHub.getAllGames()
   }
 })
 
