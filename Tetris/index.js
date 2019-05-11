@@ -1,10 +1,10 @@
 import NavBar from '../components/navbar.js'
 import GameControl from '../components/gameControl.js'
-import Grid from './lib/grid.js'
 import Game from '../shared/game.js'
 import GameState from '../shared/gameState.js'
 import EventCenter from '../shared/eventCenter.js'
 import { hidePreloader } from '../shared/utils.js'
+import Grid from './lib/grid.js'
 
 window.addEventListener('load', () => hidePreloader())
 
@@ -20,7 +20,7 @@ new Vue({
   data: () => {
     return {
       score: 0,
-      show: 'new'
+      show: 'start'
     }
   },
   methods: {
@@ -43,7 +43,7 @@ new Vue({
         window.game.stop()
       }
       this.score = 0
-      this.show = 'new'
+      this.show = 'start'
     },
     __createNewGame (canvas) {
       let event = new EventCenter()

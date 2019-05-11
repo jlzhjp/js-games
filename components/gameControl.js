@@ -6,7 +6,7 @@ export default {
     <shade :show="showShade">
       <slot></slot>
       <switcher slot="shade-content" :show="show">
-        <div class="control-panel" slot="new">
+        <div class="control-panel" slot="start">
           <h2 class="control-panel-title text-primary">{{ title }}</h2>
           <button class="pure-button button-secondary" @click="$emit('onstart')">Start</button>
         </div>
@@ -29,7 +29,7 @@ export default {
   props: {
     show: {
       type: String,
-      default: 'new'
+      default: 'start'
     },
     title: {
       type: String,

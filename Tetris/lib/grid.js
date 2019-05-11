@@ -13,10 +13,9 @@ export default class Grid {
     }
     this.__event = event
 
-    this.__event.listen('redraw', (args) => this.draw(args))
-    this.__event.listen('update', (args) => this.update(args))
-
-    window.addEventListener('keydown', (event) => this.act(event.key))
+    event.listen('keydown', event => this.act(event.key))
+    event.listen('redraw', args => this.draw(args))
+    event.listen('update', args => this.update(args))
   }
 
   act (key) {

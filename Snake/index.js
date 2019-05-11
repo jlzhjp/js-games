@@ -22,7 +22,7 @@ new Vue({
   data: () => {
     return {
       score: 0,
-      show: 'new'
+      show: 'start'
     }
   },
   methods: {
@@ -45,7 +45,7 @@ new Vue({
         window.game.stop()
       }
       this.score = 0
-      this.show = 'new'
+      this.show = 'start'
     },
     __createNewGame (canvas) {
       let event = new EventCenter()

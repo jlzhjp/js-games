@@ -23,7 +23,7 @@ export default class Snake {
     this.__event.listen('gridupdate', (args) => this.update(args))
     this.__event.listen('gridredraw', (args) => this.draw(args))
 
-    window.addEventListener('keydown', event => {
+    this.__event.listen('keydown', event => {
       if (this.__keyLock || !this.__isArrowKey(event.key)) {
         return
       }

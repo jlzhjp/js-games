@@ -13,17 +13,23 @@ export default class Game {
     this.__state = GameState.INIT
     this.__event = event
 
-    this.__objects = []
     this.__background = 'white'
     this.__score = 0
+
+    this.__handleKeyDown = args => {
+      args.game = this
+      this.__event.trigger('keydown', args)
+    }
+
     Game.__has = true
 
-    this.__event.register('stop')
-    this.__event.register('score')
-    this.__event.register('redraw')
-    this.__event.register('update')
+    event.register('stop')
+    event.register('score')
+    event.register('redraw')
+    event.register('update')
+    event.register('keydown')
 
-    this.__event.listen('score', (args) => {
+    event.listen('score', args => {
       this.__score += args.score
     })
   }
@@ -56,12 +62,7 @@ export default class Game {
     if (this.__state === GameState.PAUSED) {
       return
     }
-    if (this.__intervalId) {
-      clearInterval(this.__intervalId)
-    }
-    if (this.__frameId) {
-      window.cancelAnimationFrame(this.__frameId)
-    }
+    this.__cleanup()
   }
 
   resume () {
@@ -73,13 +74,14 @@ export default class Game {
     if (this.__state === GameState.STOPPED) {
       return
     }
-    this.pause()
+    this.__cleanup()
     this.__event.trigger('stop', { })
     this.__state = GameState.STOPPED
     Game.__has = false
   }
 
   __boot () {
+    window.addEventListener('keydown', this.__handleKeyDown)
     this.__intervalId = setInterval(() => {
       this.__event.trigger('update', { game: this })
     }, this.__tick)
@@ -92,5 +94,15 @@ export default class Game {
       this.__frameId = window.requestAnimationFrame(loop)
     }
     loop()
+  }
+
+  __cleanup() {
+    if (this.__intervalId) {
+      clearInterval(this.__intervalId)
+    }
+    if (this.__frameId) {
+      window.cancelAnimationFrame(this.__frameId)
+    }
+    window.removeEventListener('keydown', this.__handleKeyDown)
   }
 }
