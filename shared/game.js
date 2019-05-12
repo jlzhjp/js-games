@@ -16,10 +16,12 @@ export default class Game {
     this.__background = 'white'
     this.__score = 0
 
-    this.__handleKeyDown = args => {
+    const createHandler = (event) => (args) => {
       args.game = this
-      this.__event.trigger('keydown', args)
+      this.__event.trigger(event, args)
     }
+    this.__handleKeyDown = createHandler('keydown')
+    this.__handleKeyUp = createHandler('keyup')
 
     Game.__has = true
 
@@ -28,6 +30,7 @@ export default class Game {
     event.register('redraw')
     event.register('update')
     event.register('keydown')
+    event.register('keyup')
 
     event.listen('score', args => {
       this.__score += args.score
@@ -82,6 +85,8 @@ export default class Game {
 
   __boot () {
     window.addEventListener('keydown', this.__handleKeyDown)
+    window.addEventListener('keyup', this.__handleKeyUp)
+
     this.__intervalId = setInterval(() => {
       this.__event.trigger('update', { game: this })
     }, this.__tick)
@@ -103,6 +108,8 @@ export default class Game {
     if (this.__frameId) {
       window.cancelAnimationFrame(this.__frameId)
     }
+
     window.removeEventListener('keydown', this.__handleKeyDown)
+    window.removeEventListener('keyup', this.__handleKeyUp)
   }
 }

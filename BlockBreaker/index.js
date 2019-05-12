@@ -5,9 +5,11 @@ import { hidePreloader } from '../shared/utils.js';
 import NavBar from '../components/navbar.js'
 import GameControl from '../components/gameControl.js'
 import Baffle from './lib/baffle.js';
+import Ball from './lib/ball.js'
 
 window.game = null
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: {
@@ -42,10 +44,15 @@ new Vue({
       this.score = 0
       this.show = 'start'
     },
-    __createNewGame(canvas) {
+    __createNewGame (canvas) {
       let event = new EventCenter()
-      let game = new Game(event, canvas)
+      let game = new Game(event, canvas, 60 / 1000)
+      new Ball(event)
       new Baffle(event)
+
+      event.listen('stop', (_) => { this.show = 'over' })
+      event.listen('score', (args) => { this.score += args.score })
+
       return game
     }
   },
