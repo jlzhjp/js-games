@@ -101,7 +101,7 @@ export default class Game {
     loop()
   }
 
-  __cleanup() {
+  __cleanup () {
     if (this.__intervalId) {
       clearInterval(this.__intervalId)
     }
