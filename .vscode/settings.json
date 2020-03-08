@@ -1,16 +1,7 @@
 {
-  "editor.tabSize": 2,
-  "standard.options": {
-    "globals": [
-      "$",
-      "jQuery",
-      "fetch"
-    ],
-    "ignore": [
-      "node_modules/**"
-    ],
-    "plugins": [],
-    "parser": "babel-eslint",
-    "envs": [],
-  },
+    "editor.detectIndentation": false,
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 2,
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.format.semicolons": "remove"
 }

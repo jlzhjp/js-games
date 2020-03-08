@@ -1,0 +1,49 @@
+.wrapper {
+  position: relative;
+  display: table;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.5);
+  /* Experimental feature */
+  backdrop-filter: blur(6px);
+}
+
+.title {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.score {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btnFirst {
+  /* Override material-ui*/
+  position: absolute !important;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btnSecond {
+  position: absolute !important;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* https://stackoverflow.com/questions/9878090 */
+.canvas {
+  display: block;
+}

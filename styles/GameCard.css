@@ -1,0 +1,8 @@
+.cover {
+  max-width: 100%;
+}
+
+.wrapper {
+  max-width: 30rem;
+  margin: 1rem;
+}
