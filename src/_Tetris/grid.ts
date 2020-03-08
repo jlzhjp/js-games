@@ -1,6 +1,6 @@
-import Brick from './brick'
+import { DOMEventArgs, EventArgs, RedrawEventArgs, ScoreEventArgs, UpdateEventArgs } from '../eventArgs'
 import Events from '../events'
-import { DOMEventArgs, RedrawEventArgs, UpdateEventArgs, ScoreEventArgs, EventArgs } from '../eventArgs'
+import Brick from './brick'
 
 export default class Grid {
   private _fixedBlocks: string[][] = []

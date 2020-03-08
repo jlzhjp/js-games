@@ -1,7 +1,7 @@
 import Game from '../game'
+import Foods from './foods'
 import Grid from './grid'
 import Snake from './snake'
-import Foods from './foods'
 
 export default (canvas: HTMLCanvasElement): Game => {
   canvas.width = 600

@@ -1,9 +1,9 @@
 import React from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import Index from '../routes/Index'
-import Game from '../routes/Game'
+import { Route, Switch } from 'react-router'
 import { useLocation } from 'react-router-dom'
-import { Switch, Route } from 'react-router'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import Game from '../routes/Game'
+import Index from '../routes/Index'
 
 export default function Routes() {
   const location = useLocation()

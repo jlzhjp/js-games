@@ -1,5 +1,5 @@
-import Coordinate from "../utils/coordinate";
-import { EventArgs } from "../eventArgs";
+import { EventArgs } from "../eventArgs"
+import Coordinate from "../utils/coordinate"
 
 export class CellChangedEventArgs extends EventArgs {
   public cell: Coordinate
@@ -63,7 +63,7 @@ export class SnakeMoveEventArgs extends EventArgs {
   }
 
   public get row(): number { return this._row }
-  public get column(): number  { return this._column }
+  public get column(): number { return this._column }
   public get body(): Coordinate[] { return this._body }
   // Used to generate new food.
   public get occupiedCells(): Coordinate[] { return this._occupiedCells }

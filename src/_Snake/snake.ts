@@ -1,7 +1,7 @@
-import Coordinate from '../utils/coordinate'
-import Events from '../events'
-import { SnakeMoveEventArgs, SnakeGrowEventArgs, GridUpdateEventArgs, GridRedrawEventArgs, CellChangedEventArgs } from './eventArgs'
 import { DOMEventArgs, EventArgs } from '../eventArgs'
+import Events from '../events'
+import Coordinate from '../utils/coordinate'
+import { CellChangedEventArgs, GridRedrawEventArgs, GridUpdateEventArgs, SnakeGrowEventArgs, SnakeMoveEventArgs } from './eventArgs'
 
 const enum Direction {
   Up = 1,

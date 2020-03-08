@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Coordinate from '../utils/coordinate'
-import { randomItem, randomInt } from '../utils/random'
+import { randomInt, randomItem } from '../utils/random'
 import bricks from './bricks'
 
 export default class Brick {

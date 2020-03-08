@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import { randomCoordinate, randomItem } from '../utils/random'
 import Events from '../events'
 import Coordinate from '../utils/coordinate'
-import { GridRedrawEventArgs, SnakeMoveEventArgs, SnakeGrowEventArgs, CellChangedEventArgs } from './eventArgs'
+import { randomItem } from '../utils/random'
+import { GridRedrawEventArgs, SnakeGrowEventArgs, SnakeMoveEventArgs } from './eventArgs'
 
 export default class Foods {
   private _events: Events

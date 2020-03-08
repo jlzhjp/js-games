@@ -1,8 +1,8 @@
-import Events from './events'
-import { fromEvent, interval, NEVER } from 'rxjs'
-import { filter, map, takeUntil } from 'rxjs/operators'
-import { ScoreEventArgs, RedrawEventArgs, UpdateEventArgs, DOMEventArgs, StateChangedEventArgs } from './eventArgs'
+import { fromEvent, interval } from 'rxjs'
 import { animationFrame } from 'rxjs/internal/scheduler/animationFrame'
+import { filter, map, takeUntil } from 'rxjs/operators'
+import { DOMEventArgs, RedrawEventArgs, ScoreEventArgs, StateChangedEventArgs, UpdateEventArgs } from './eventArgs'
+import Events from './events'
 
 export const enum GameState {
   Init,
@@ -95,7 +95,7 @@ export default class Game {
   }
 
   public resume() {
-    if  (this._state === GameState.Paused) {
+    if (this._state === GameState.Paused) {
       this._state = GameState.Running
       this._events.emitDefault('statechanged', new StateChangedEventArgs(GameState.Running))
     }

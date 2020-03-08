@@ -1,8 +1,7 @@
+import { Button, Card, CardActionArea, CardActions, CardContent, Link, Typography } from '@material-ui/core'
 import React from 'react'
-import { Card, CardActionArea, CardContent, Typography, CardActions, Button } from '@material-ui/core'
-import styles from '../styles/GameCard.css'
 import { Link as RouterLink } from 'react-router-dom'
-import { Link } from '@material-ui/core'
+import styles from '../styles/GameCard.css'
 
 interface IProps {
   name: string

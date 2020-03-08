@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs'
-import { EventArgs, } from './eventArgs'
+import { EventArgs } from './eventArgs'
 
 export default class Events {
   private _map = new Map<string, Observable<any>>()

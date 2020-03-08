@@ -1,11 +1,8 @@
-import React, { useState, createRef, useEffect } from 'react'
+import { Button, Card, Typography } from '@material-ui/core'
+import React, { createRef, useEffect, useState } from 'react'
+import { ScoreEventArgs, StateChangedEventArgs } from '../src/eventArgs'
 import Game, { GameState } from '../src/game'
-import { Button, Typography, Card } from '@material-ui/core'
 import styles from '../styles/GameControl.css'
-import { StateChangedEventArgs, ScoreEventArgs } from '../src/eventArgs'
-import red from '@material-ui/core/colors/red'
-import green from '@material-ui/core/colors/green'
-import yellow from '@material-ui/core/colors/yellow'
 
 interface IProps {
   name: string

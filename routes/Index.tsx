@@ -2,7 +2,6 @@ import React from 'react'
 import GameCard from '../components/GameCard'
 import games from '../games'
 import styles from '../styles/Index.css'
-import { CSSTransition } from 'react-transition-group'
 
 const getGameCards = () =>
   games.map(g => {

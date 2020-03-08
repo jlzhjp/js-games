@@ -1,8 +1,7 @@
-import React, { useEffect, createRef } from 'react'
+import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
-import games from '../games'
 import GameControl from '../components/GameControl'
+import games from '../games'
 import styles from '../styles/Game.css'
 
 interface RouteInfo {

@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import Coordinate from "../utils/coordinate"
+import { RedrawEventArgs, UpdateEventArgs } from "../eventArgs"
 import Events from "../events"
-import { UpdateEventArgs, RedrawEventArgs } from "../eventArgs"
-import { CellChangedEventArgs, GridUpdateEventArgs, GridRedrawEventArgs } from "./eventArgs"
+import Coordinate from "../utils/coordinate"
+import { CellChangedEventArgs, GridRedrawEventArgs, GridUpdateEventArgs } from "./eventArgs"
 
 export default class Grid {
   private _row: number
