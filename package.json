@@ -8,8 +8,10 @@
     "@types/react": "^16.9.21",
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.3",
+    "material-colors": "^1.2.6",
     "parcel-bundler": "^1.12.4",
     "postcss-modules": "^1.5.0",
+    "sass": "^1.26.2",
     "typescript": "^3.8.2"
   },
   "dependencies": {
@@ -24,7 +26,7 @@
   },
   "scripts": {
     "start": "yarn parcel index.html",
-    "build": "yarn parcel build index.html --experimental-scope-hoisting",
-    "clean": "rm -r ./dist"
+    "build": "yarn parcel build index.html",
+    "clean": "pwsh -c rm -r ./dist"
   }
 }

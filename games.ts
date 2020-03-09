@@ -5,15 +5,15 @@ import TetrisInit from './src/_Tetris/initializer'
 export default [
   {
     id: 1,
-    name: "Snake",
-    source: "",
+    name: 'Snake',
+    src: 'https://github.com/jlzhjp/web-games/tree/master/src/_Snake',
     cover: placeholder,
     init: SnakeInit
   },
   {
     id: 2,
-    name: "Tetris",
-    source: "",
+    name: 'Tetris',
+    src: 'https://github.com/jlzhjp/web-games/tree/master/src/_Tetris',
     cover: placeholder,
     init: TetrisInit
   }

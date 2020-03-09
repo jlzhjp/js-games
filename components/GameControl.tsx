@@ -2,7 +2,7 @@ import { Button, Card, Typography } from '@material-ui/core'
 import React, { createRef, useEffect, useState } from 'react'
 import { ScoreEventArgs, StateChangedEventArgs } from '../src/eventArgs'
 import Game, { GameState } from '../src/game'
-import styles from '../styles/GameControl.css'
+import styles from '../styles/GameControl.scss'
 
 interface IProps {
   name: string
@@ -24,7 +24,7 @@ export default function GameControl(props: IProps) {
     game.events.get<StateChangedEventArgs>('statechanged')
       .subscribe({ next: args => setStatus(args.newState) })
     game.events.get<ScoreEventArgs>('score')
-      .subscribe({ next: args => setScore(args.score) })
+      .subscribe({ next: args => setScore(prev => prev + args.score) })
     game.start()
   }
 
@@ -67,37 +67,31 @@ export default function GameControl(props: IProps) {
     }
   })
 
-  const PanelTemplate: React.FC<{ children: React.ReactNode }> = (props) =>
-    <div className={`animated fadeIn ${styles.mask}`}>
-      {props.children}
-    </div>
-
-
   const panel = (() => {
     switch (status) {
       case GameState.Init:
         return (
-          <PanelTemplate>
+          <div className={`${styles.mask}`}>
             <Typography className={styles.title} variant='h2' component='h2'>{name}</Typography>
-            <Button className={styles.btnFirst} onClick={start}>Start</Button>
-          </PanelTemplate>
+            <Button className={styles.actionFirst} onClick={start}>Start</Button>
+          </div>
         )
       case GameState.Paused:
         return (
-          <PanelTemplate>
+          <div className={`animated fadeIn ${styles.mask}`}>
             <Typography className={styles.title} variant='h2' component='h2'>Paused</Typography>
             <Typography className={styles.score} variant='h5' component='span'>Current Score: {score}</Typography>
-            <Button className={styles.btnFirst} onClick={resume}>Resume</Button>
-            <Button className={styles.btnSecond} onClick={back}>Back</Button>
-          </PanelTemplate>
+            <Button className={styles.actionFirst} onClick={resume}>Resume</Button>
+            <Button className={styles.actionSecond} onClick={back}>Back</Button>
+          </div>
         )
       case GameState.Stopped:
         return (
-          <PanelTemplate>
+          <div className={`animated fadeIn ${styles.mask}`}>
             <Typography className={styles.title} variant='h2' component='h2'>Game Over</Typography>
             <Typography className={styles.score} variant='h5' component='span'>Current Score: {score}</Typography>
-            <Button className={styles.btnFirst} onClick={back}>Back</Button>
-          </PanelTemplate>
+            <Button className={styles.actionFirst} onClick={back}>Back</Button>
+          </div>
         )
       case GameState.Running:
         return null

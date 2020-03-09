@@ -1,7 +1,7 @@
 {
-    "editor.detectIndentation": false,
-    "files.trimTrailingWhitespace": true,
-    "editor.tabSize": 2,
-    "typescript.preferences.quoteStyle": "single",
-    "typescript.format.semicolons": "remove"
+  "editor.detectIndentation": false,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.format.semicolons": "remove"
 }

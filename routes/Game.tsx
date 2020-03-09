@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import GameControl from '../components/GameControl'
 import games from '../games'
-import styles from '../styles/Game.css'
+import styles from '../styles/Game.scss'
 
 interface RouteInfo {
   id: string

@@ -1,7 +1,7 @@
 import { AppBar, Avatar, Toolbar, Typography } from '@material-ui/core'
 import React from 'react'
 import avatar from '../assets/akari.jpg'
-import styles from '../styles/TopBar.css'
+import styles from '../styles/TopBar.scss'
 
 export default function TopBar() {
   return (
