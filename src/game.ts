@@ -45,7 +45,7 @@ export default class Game {
     this._events.register<UpdateEventArgs>('update', interval(tick).pipe(
       takeUntil(stop$),
       filter(_ => this.isRunning),
-      map(_ => new UpdateEventArgs())
+      map(_ => new UpdateEventArgs(canvas.width, canvas.height))
     ))
 
     // To avoid flickering

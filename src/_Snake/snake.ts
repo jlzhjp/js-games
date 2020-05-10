@@ -78,8 +78,6 @@ export default class Snake {
       case Direction.Left:
         newHead = new Coordinate(this.reduceX(this.head.x, 1, column), this.head.y)
         break
-      default:
-        throw new Error('Unexpected enum value.')
     }
 
     this._body.unshift(newHead)

@@ -13,9 +13,7 @@ export default class Foods {
   constructor(events: Events) {
     this._events = events
 
-    this._events.get<GridRedrawEventArgs>('gridredraw').subscribe({
-      next: args => this.draw(args)
-    })
+    this._events.get<GridRedrawEventArgs>('gridredraw').subscribe({ next: this.draw })
     this._events.get<SnakeMoveEventArgs>('snakemove').subscribe({
       next: args => {
         if (!this._posUpdated) {

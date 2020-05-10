@@ -42,8 +42,6 @@ export default class Grid {
       case 'ArrowDown':
         this.drop()
         break
-      default:
-        break
     }
   }
 
