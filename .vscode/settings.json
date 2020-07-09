@@ -1,7 +1,11 @@
 {
-  "editor.detectIndentation": false,
-  "files.trimTrailingWhitespace": true,
-  "editor.tabSize": 2,
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.quoteStyle": "single",
-  "typescript.format.semicolons": "remove"
+  "typescript.format.semicolons": "remove",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

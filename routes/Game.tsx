@@ -1,22 +1,25 @@
-import React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import * as React from 'react'
+import { useRef, useEffect, useState, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
+import config from '../config'
 import GameControl from '../components/GameControl'
-import games from '../games'
-import styles from '../styles/Game.scss'
 
-interface RouteInfo {
-  id: string
-}
+export default function Game() {
+  const { id } = useParams()
+  const gameInfo = useRef(
+    () => config.games.find((g) => g.id.toString() === id)!
+  )
+  const gameRef = useRef(() => gameInfo.current().game())
+  useEffect(() => gameRef.current().stop())
 
-const getGameInfo = (id: number) => games.find(x => x.id === id)
-
-export default function Game(props: RouteComponentProps<RouteInfo>) {
-  const gameInfo = getGameInfo(parseInt(props.match.params.id))
-  if (!gameInfo) return <span>Error: Invalid game id!</span>
+  if (!gameInfo) return <span>Invalid game id.</span>
 
   return (
-    <div className={styles.centerWrapper}>
-      <GameControl name={gameInfo.name} init={gameInfo.init} />
+    <div>
+      <GameControl
+        name={gameInfo.current().name}
+        game={gameRef.current()}
+      />
     </div>
   )
 }

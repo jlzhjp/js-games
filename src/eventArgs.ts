@@ -1,14 +1,20 @@
-import { GameState } from './game'
+import Effect from './effect'
 
-export class EventArgs { }
+// tag class
+export class EventArgs {}
 
 export class RedrawEventArgs extends EventArgs {
-  public width: number
-  public height: number
-  public background: string
-  public context: CanvasRenderingContext2D
+  public readonly width: number
+  public readonly height: number
+  public readonly background: string
+  public readonly context: CanvasRenderingContext2D
 
-  public constructor(width: number, height: number, background: string, context: CanvasRenderingContext2D) {
+  public constructor(
+    width: number,
+    height: number,
+    background: string,
+    context: CanvasRenderingContext2D,
+  ) {
     super()
     this.width = width
     this.height = height
@@ -18,36 +24,33 @@ export class RedrawEventArgs extends EventArgs {
 }
 
 export class UpdateEventArgs extends EventArgs {
-  public width: number
-  public height: number
-  public constructor(width: number, height: number) {
+  public readonly width: number
+  public readonly height: number
+  public readonly addEffect: (effect: Effect) => void
+
+  public constructor(
+    width: number,
+    height: number,
+    addEffect: (effect: Effect) => void
+  ) {
     super()
     this.width = width
     this.height = height
+    this.addEffect = addEffect
   }
-}
-
-export class StateChangedEventArgs extends EventArgs {
-  private _newState: GameState
-  public constructor(newState: GameState) {
-    super()
-    this._newState = newState
-  }
-
-  public get newState() { return this._newState }
 }
 
 export class ScoreEventArgs extends EventArgs {
-  public score: number = 0
+  public readonly delta: number = 0
 
-  public constructor(score: number) {
+  public constructor(delta: number) {
     super()
-    this.score = score
+    this.delta = delta
   }
 }
 
 export class DOMEventArgs<TEvent> extends EventArgs {
-  public native: TEvent
+  public readonly native: TEvent
 
   public constructor(event: TEvent) {
     super()
